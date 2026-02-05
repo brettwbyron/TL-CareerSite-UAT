@@ -20,11 +20,6 @@
     {
       "id": "inprogress",
       "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "done",
-      "title": "Done",
       "items": [
         {
           "id": 1770326603935,
@@ -33,9 +28,14 @@
           "feedback": "TOMMY LIKEY!!!",
           "section": "Hell yeah",
           "createdAt": "2026-02-05T21:23:23.935Z",
-          "updatedAt": "2026-02-05T21:23:56.836Z"
+          "updatedAt": "2026-02-05T21:23:59.188Z"
         }
       ]
+    },
+    {
+      "id": "done",
+      "title": "Done",
+      "items": []
     }
   ]
 }
