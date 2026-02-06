@@ -5,6 +5,26 @@
     {
       "id": "todo",
       "title": "To Do",
+      "items": []
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress",
+      "items": []
+    },
+    {
+      "id": "retest",
+      "title": "Re-Test",
+      "items": []
+    },
+    {
+      "id": "feedback",
+      "title": "Feedback Needed",
+      "items": []
+    },
+    {
+      "id": "done",
+      "title": "Done",
       "items": [
         {
           "id": 1770326945792,
@@ -16,16 +36,6 @@
           "updatedAt": "2026-02-05T21:36:05.313Z"
         }
       ]
-    },
-    {
-      "id": "inprogress",
-      "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "done",
-      "title": "Done",
-      "items": []
     }
   ]
 }
