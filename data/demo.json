@@ -14,13 +14,7 @@
           "section": "All pages",
           "createdAt": "2026-02-05T21:19:12.344Z",
           "updatedAt": "2026-02-05T21:19:12.344Z"
-        }
-      ]
-    },
-    {
-      "id": "inprogress",
-      "title": "In Progress",
-      "items": [
+        },
         {
           "id": 1770326603935,
           "description": "This is freaking awesome!",
@@ -31,6 +25,11 @@
           "updatedAt": "2026-02-05T21:23:59.188Z"
         }
       ]
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress",
+      "items": []
     },
     {
       "id": "done",
