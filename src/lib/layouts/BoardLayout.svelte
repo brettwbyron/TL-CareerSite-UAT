@@ -16,7 +16,7 @@
   const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER || 'your-github-username';
   const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || 'uat-app';
   const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || 'your-github-token';
-  const GITHUB_BRANCH = import.meta.env.VITE_GITHUB_BRANCH || 'main';
+  const GITHUB_BRANCH = import.meta.env.VITE_GITHUB_BRANCH || 'data';
   
   const STORAGE_VERSION = '1.0';
 
