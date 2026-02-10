@@ -76,5 +76,5 @@
       ]
     }
   ],
-  "disableAddTask": false
+  "disableAddTask": true
 }
