@@ -10,11 +10,6 @@
     {
       "id": "inprogress",
       "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "retest",
-      "title": "Re-Test",
       "items": [
         {
           "id": 1770326945792,
@@ -24,9 +19,15 @@
           "section": "Home",
           "createdAt": "2026-02-05T21:29:05.792Z",
           "updatedAt": "2026-02-05T21:36:05.313Z",
+          "locked": true,
           "images": []
         }
       ]
+    },
+    {
+      "id": "retest",
+      "title": "Re-Test",
+      "items": []
     },
     {
       "id": "feedback",
