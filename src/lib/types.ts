@@ -1,6 +1,6 @@
-export type TaskType = 'Change Request' | 'Issue' | 'Bug' | 'Feature';
+export type TaskType = 'Change Request' | 'Issue';
 
-export type ColumnId = 'todo' | 'inprogress' | 'done';
+export type ColumnId = 'todo' | 'inprogress' | 'retest' | 'feedback' | 'done';
 
 export interface Task {
 	id: number;
@@ -10,6 +10,8 @@ export interface Task {
 	section: string;
 	createdAt: string;
 	updatedAt: string;
+	locked?: boolean;
+	images?: string[];
 }
 
 export interface Column {
@@ -19,8 +21,10 @@ export interface Column {
 }
 
 export interface BoardData {
-	columns: Column[];
+	passwordHash: string;
 	version: string;
+	columns: Column[];
+	disableAddTask: boolean;
 }
 
 export interface ModalData {
@@ -28,6 +32,7 @@ export interface ModalData {
 	type: TaskType;
 	feedback: string;
 	section: string;
+	images: string[];
 }
 
 export interface Toast {
