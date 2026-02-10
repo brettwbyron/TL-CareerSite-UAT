@@ -1,9 +1,8 @@
 <script lang="ts">
-	import logo from '$lib/assets/logo_padded-transparent_bg.svg';
+	import logo from '$lib/assets/favicon.ico';
 
 	let { children } = $props();
-	const title = 'UAT App';
-	const href = '#';
+	const title = 'UAT';
 	let prefersDark = $state(true);
 	let isDark = $state(true);
 
@@ -39,25 +38,14 @@
 <div class="layout">
 	<nav class="navbar">
 		<div class="nav-left">
-			<a href="/" class="svelte-icon">
-				<img src={logo} alt="Svelte" width="32" height="32" />
-			</a>
+			<div class="tl-icon">
+				<img src={logo} alt="Talemetry" width="32" height="32" />
+			</div>
 
 			<p class="title">{title}</p>
 		</div>
 
 		<div class="nav-right">
-			<a
-				href={href}
-				class="raised"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<span aria-hidden="true" style="margin-left:0.25em;">
-					↗
-				</span>
-			</a>
-
 			<button
 				class="raised theme-toggle"
 				onclick={switchTheme}
