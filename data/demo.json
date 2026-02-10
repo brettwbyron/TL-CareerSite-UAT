@@ -35,19 +35,7 @@
     {
       "id": "inprogress",
       "title": "In Progress",
-      "items": [
-        {
-          "id": 1770326603935,
-          "description": "This is freaking awesome!",
-          "type": "Change Request",
-          "feedback": "TOMMY LIKEY!!!\n\nCWS Dev 2/10/26: Thank you good sir!",
-          "section": "Hell yeah",
-          "createdAt": "2026-02-05T21:23:23.935Z",
-          "updatedAt": "2026-02-05T21:23:59.188Z",
-          "locked": true,
-          "images": []
-        }
-      ]
+      "items": []
     },
     {
       "id": "retest",
@@ -73,7 +61,19 @@
     {
       "id": "done",
       "title": "Done",
-      "items": []
+      "items": [
+        {
+          "id": 1770326603935,
+          "description": "This is freaking awesome!",
+          "type": "Change Request",
+          "feedback": "TOMMY LIKEY!!!\n\nCWS Dev 2/10/26: Thank you good sir!",
+          "section": "Hell yeah",
+          "createdAt": "2026-02-05T21:23:23.935Z",
+          "updatedAt": "2026-02-05T21:23:59.188Z",
+          "locked": true,
+          "images": []
+        }
+      ]
     }
   ],
   "disableAddTask": false
