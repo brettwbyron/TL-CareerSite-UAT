@@ -87,16 +87,23 @@ export async function listAllDataFromGitHub(
   config: GitHubConfig
 ) {
   try {
-    const { data: dataFiles } = await octokit.rest.repos.getContent({
+    const response = await octokit.rest.repos.getContent({
       owner: config.owner,
       repo: config.repo,
-      path: `data/`,
+      path: 'data',
       ref: config.branch
     });
 
-    return Object.entries(dataFiles).filter(df => df[1].name != '.gitkeep').map(df => df[1]);
+    const dataFiles = response.data;
+    
+    if (!Array.isArray(dataFiles)) {
+      console.error('Expected array of files but received:', typeof dataFiles);
+      return false;
+    }
+    
+    return dataFiles.filter(file => file.name !== '.gitkeep');
   } catch (error) {
-    console.error(error);
+    console.error('Error loading customer list:', error);
     return false;
   }
 }
