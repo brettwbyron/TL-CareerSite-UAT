@@ -42,6 +42,17 @@
           "updatedAt": "2026-02-06T20:00:59.091Z",
           "locked": true,
           "images": []
+        },
+        {
+          "id": 1770326603935,
+          "description": "This is freaking awesome!",
+          "type": "Issue",
+          "feedback": "TOMMY LIKEY!!!\n\nCWS Dev 2/10/26: Thank you good sir!",
+          "section": "Hell yeah",
+          "createdAt": "2026-02-05T21:23:23.935Z",
+          "updatedAt": "2026-02-05T21:23:59.188Z",
+          "locked": true,
+          "images": []
         }
       ]
     },
@@ -63,19 +74,7 @@
     {
       "id": "done",
       "title": "Done",
-      "items": [
-        {
-          "id": 1770326603935,
-          "description": "This is freaking awesome!",
-          "type": "Issue",
-          "feedback": "TOMMY LIKEY!!!\n\nCWS Dev 2/10/26: Thank you good sir!",
-          "section": "Hell yeah",
-          "createdAt": "2026-02-05T21:23:23.935Z",
-          "updatedAt": "2026-02-05T21:23:59.188Z",
-          "locked": true,
-          "images": []
-        }
-      ]
+      "items": []
     }
   ],
   "disableAddTask": false
