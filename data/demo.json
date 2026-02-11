@@ -33,17 +33,6 @@
           "locked": false
         },
         {
-          "id": 1770326603935,
-          "description": "This is freaking awesome!",
-          "type": "Issue",
-          "feedback": "TOMMY LIKEY!!!\n\nCWS Dev 2/10/26: Thank you good sir!",
-          "section": "Hell yeah",
-          "createdAt": "2026-02-05T21:23:23.935Z",
-          "updatedAt": "2026-02-05T21:23:59.188Z",
-          "locked": false,
-          "images": []
-        },
-        {
           "id": 1770408059091,
           "description": "A UAT item ready for re-testing. Customers shouldn't be able to move anything TO re-test, but should be able to move things away from re-test once they have tested.",
           "type": "Change Request",
@@ -74,7 +63,19 @@
     {
       "id": "done",
       "title": "Done",
-      "items": []
+      "items": [
+        {
+          "id": 1770326603935,
+          "description": "This is freaking awesome!",
+          "type": "Issue",
+          "feedback": "TOMMY LIKEY!!!\n\nCWS Dev 2/10/26: Thank you good sir!",
+          "section": "Hell yeah",
+          "createdAt": "2026-02-05T21:23:23.935Z",
+          "updatedAt": "2026-02-05T21:23:59.188Z",
+          "locked": true,
+          "images": []
+        }
+      ]
     }
   ],
   "disableAddTask": false
