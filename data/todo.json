@@ -19,6 +19,17 @@
           "updatedAt": "2026-02-11T17:21:12.908Z",
           "locked": false,
           "images": []
+        },
+        {
+          "id": 1770830564907,
+          "description": "When not in admin mode, some of these columns should be hidden when empty. Specifically, the \"Feedback\", \"In progress\" and \"Re-test\" columns should be hidden when empty.",
+          "type": "Change Request",
+          "feedback": "",
+          "section": "Board",
+          "createdAt": "2026-02-11T17:22:44.907Z",
+          "updatedAt": "2026-02-11T17:22:44.907Z",
+          "locked": false,
+          "images": []
         }
       ]
     },
