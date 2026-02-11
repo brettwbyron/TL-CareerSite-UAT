@@ -51,7 +51,7 @@
           "section": "Hell yeah",
           "createdAt": "2026-02-05T21:23:23.935Z",
           "updatedAt": "2026-02-05T21:23:59.188Z",
-          "locked": true,
+          "locked": false,
           "images": []
         }
       ]
