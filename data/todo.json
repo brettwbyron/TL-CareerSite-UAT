@@ -10,17 +10,6 @@
       "title": "To Do",
       "items": [
         {
-          "id": 1770830564907,
-          "description": "When not in admin mode, some of these columns should be hidden when empty. Specifically, the \"Feedback\", \"In progress\" and \"Re-test\" columns should be hidden when empty.",
-          "type": "Change Request",
-          "feedback": "",
-          "section": "Board",
-          "createdAt": "2026-02-11T17:22:44.907Z",
-          "updatedAt": "2026-02-11T17:22:44.907Z",
-          "locked": false,
-          "images": []
-        },
-        {
           "id": 1770830750701,
           "description": "Multiple UAT instances for single accounts. If a customer has multi-lingual, internal/external, subsidiaries, etc., it could be nice to not have to create a new account each time and have all UATs in one account.",
           "type": "Feature",
@@ -36,7 +25,19 @@
     {
       "id": "inprogress",
       "title": "In Progress",
-      "items": []
+      "items": [
+        {
+          "id": 1770830564907,
+          "description": "When not in admin mode, some of these columns should be hidden when empty. Specifically, the \"Feedback\", \"In progress\" and \"Re-test\" columns should be hidden when empty.",
+          "type": "Change Request",
+          "feedback": "",
+          "section": "Board",
+          "createdAt": "2026-02-11T17:22:44.907Z",
+          "updatedAt": "2026-02-11T17:22:44.907Z",
+          "locked": true,
+          "images": []
+        }
+      ]
     },
     {
       "id": "retest",
