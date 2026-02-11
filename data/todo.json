@@ -32,17 +32,6 @@
           "images": []
         },
         {
-          "id": 1770830629992,
-          "description": "Make the \"type\" completely admin only. Customers don't know the difference and we usually have to set this ourselves anyway.",
-          "type": "Change Request",
-          "feedback": "",
-          "section": "TaskModal",
-          "createdAt": "2026-02-11T17:23:49.992Z",
-          "updatedAt": "2026-02-11T17:23:49.992Z",
-          "locked": false,
-          "images": []
-        },
-        {
           "id": 1770830750701,
           "description": "Multiple UAT instances for single accounts. If a customer has multi-lingual, internal/external, subsidiaries, etc., it could be nice to not have to create a new account each time and have all UATs in one account.",
           "type": "Feature",
@@ -63,7 +52,19 @@
     {
       "id": "retest",
       "title": "Re-Test",
-      "items": []
+      "items": [
+        {
+          "id": 1770830629992,
+          "description": "Make the \"type\" completely admin only. Customers don't know the difference and we usually have to set this ourselves anyway.",
+          "type": "Change Request",
+          "feedback": "",
+          "section": "TaskModal",
+          "createdAt": "2026-02-11T17:23:49.992Z",
+          "updatedAt": "2026-02-11T17:23:49.992Z",
+          "locked": true,
+          "images": []
+        }
+      ]
     },
     {
       "id": "feedback",
