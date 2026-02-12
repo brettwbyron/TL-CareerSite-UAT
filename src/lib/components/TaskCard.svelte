@@ -21,8 +21,6 @@
     onToggleLock?: (itemId: number) => void;
   } = $props();
 
-  let selectedImage = $state<string | null>(null);
-
   function handleDragStart(e: DragEvent) {
     if (isReadOnly) {
       e.preventDefault();
@@ -50,18 +48,6 @@
       onToggleLock(item.id);
     }
   }
-
-  function handleImageClick(e: MouseEvent, image: string) {
-    e.stopPropagation();
-    selectedImage = image;
-  }
-
-  function closeImageModal(e?: MouseEvent) {
-    if (e) {
-      e.stopPropagation();
-    }
-    selectedImage = null;
-  }
 </script>
 
 <div 
@@ -77,16 +63,6 @@
   onkeydown={handleKeydown}
 >
   <div class="item-content">
-      {#if isAdmin}
-        <button
-          class="lock-toggle"
-          onclick={handleLockToggle}
-          aria-label={item.locked ? 'Unlock task' : 'Lock task'}
-          title={item.locked ? 'Click to unlock task' : 'Click to lock task'}
-        >
-          {item.locked ? '🔒' : '🔓'}
-        </button>
-      {/if}
       <p class="item-description">{item.description}</p>
       {#if item.images && item.images.length > 0}
         <div class="item-images">
@@ -108,6 +84,16 @@
       {/if}
       <div class="item-header">
         <span class="item-type">{item.type}</span>
+        {#if isAdmin}
+          <button
+            class="lock-toggle"
+            onclick={handleLockToggle}
+            aria-label={item.locked ? 'Unlock task' : 'Lock task'}
+            title={item.locked ? 'Click to unlock task' : 'Click to lock task'}
+          >
+            {item.locked ? '🔒' : '🔓'}
+          </button>
+        {/if}
       </div>
   </div>
 </div>
@@ -121,6 +107,7 @@
     border: 2px solid transparent;
     transition: all 0.2s;
     position: relative;
+    user-select: none;
   }
   
   .item.read-only {
@@ -128,13 +115,13 @@
     opacity: 0.8;
   }
 
-  .item:hover {
+  .item:not(.read-only):hover {
     border-color: #4CAF50;
     transform: translateY(-2px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .item:focus {
+  .item:not(.read-only):focus {
     outline: 2px solid #4CAF50;
     outline-offset: 2px;
   }
@@ -151,14 +138,10 @@
   }
 
   .lock-toggle {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
     background: none;
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
-    padding: 0.25rem;
     line-height: 1;
     opacity: 0.7;
     transition: opacity 0.2s, transform 0.2s;
@@ -198,6 +181,13 @@
     color: var(--fg-1);
     font-weight: 500;
     line-height: 1.4;
+    display: -webkit-box;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .item-images {

@@ -1,11 +1,16 @@
-export type TaskType = 'Change Request' | 'Issue';
+export const TASK_TYPES = ['Change Request', 'Issue', 'Feature', 'Bug'] as const;
+export const DEVICE_TYPES = ['All', 'Desktop', 'Mobile'] as const;
 
-export type ColumnId = 'todo' | 'inprogress' | 'retest' | 'feedback' | 'done';
+export type DeviceType = typeof DEVICE_TYPES[number];
+export type TaskType = typeof TASK_TYPES[number];
+
+export type ColumnId = 'todo' | 'inprogress' | 'retest' | 'feedback' | 'done' | 'cancelled';
 
 export interface Task {
 	id: number;
 	description: string;
 	type: TaskType;
+	device: DeviceType;
 	feedback: string;
 	section: string;
 	createdAt: string;
@@ -21,6 +26,9 @@ export interface Column {
 }
 
 export interface BoardData {
+	displayName?: string;
+	uatEndDate?: string;
+	devSiteUrl?: string;
 	passwordHash: string;
 	version: string;
 	columns: Column[];
@@ -30,6 +38,7 @@ export interface BoardData {
 export interface ModalData {
 	description: string;
 	type: TaskType;
+	device: DeviceType;
 	feedback: string;
 	section: string;
 	images: string[];

@@ -9,7 +9,7 @@
 
 <div class="toast-container">
   {#each toasts as toast (toast.id)}
-    <div class="toast toast-{toast.type}" in:fly={{ x: 100, duration: 300 }} out:fly={{ x: 100, duration: 500 }}>
+    <div class="toast toast-{toast.type}" in:fly={{ x: 0, duration: 300 }} out:fly={{ x: 0, duration: 500 }}>
       {toast.message}
     </div>
   {/each}
@@ -22,6 +22,7 @@
     right: 2rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 0.5rem;
     z-index: 10000;
   }
@@ -31,28 +32,8 @@
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     font-weight: 500;
-    min-width: 250px;
-  }
-
-  @keyframes slideIn {
-    from {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  @keyframes slideOut {
-    from {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    to {
-      transform: translateX(100%);
-      opacity: 0;
-    }
+    width: fit-content;
+    max-width: 400px;
   }
 
   .toast-success {

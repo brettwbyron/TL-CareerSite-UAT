@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { TaskType } from '$lib/types';
+  import { TASK_TYPES } from '$lib/types';
 
   let {
     searchQuery = $bindable<string>(''),
@@ -22,6 +23,12 @@
       placeholder="Search tasks..." 
       bind:value={searchQuery}
     />
+    <select class="filter-select" bind:value={filterType}>
+      <option value="All">All Types</option>
+      {#each TASK_TYPES as type}
+        <option value={type}>{type}</option>
+      {/each}
+    </select>
   </div>
 
   <div class="action-buttons">
@@ -67,6 +74,23 @@
     border-color: #4CAF50;
   }
 
+  .filter-select {
+    padding: 0.75rem;
+    border: 2px solid var(--bg-3);
+    border-radius: 4px;
+    font-size: 1rem;
+    background: var(--bg-2);
+    color: var(--fg-1);
+    box-sizing: border-box;
+    cursor: pointer;
+    min-width: 150px;
+  }
+
+  .filter-select:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+
   .action-buttons {
     display: flex;
     gap: 0.75rem;
@@ -107,6 +131,19 @@
 
     .search-filters {
       flex-direction: column;
+    }
+
+    .filter-select {
+      min-width: unset;
+      width: 100%;
+    }
+
+    .action-buttons {
+      width: 100%;
+    }
+
+    .add-task-btn {
+      width: 100%;
     }
   }
 </style>

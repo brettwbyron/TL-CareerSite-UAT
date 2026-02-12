@@ -44,19 +44,17 @@
 
 			<p class="title">{title}</p>
 		</div>
-
-		<div class="nav-right">
-			<button
-				class="raised theme-toggle"
-				onclick={switchTheme}
-				aria-label="Toggle theme"
-			>
-				<span class="icon"></span>
-			</button>
-		</div>
 	</nav>
 
 	<main class="content">{@render children()}</main>
+	
+	<button
+		class="theme-toggle-fixed"
+		onclick={switchTheme}
+		aria-label="Toggle theme"
+	>
+		<span class="icon"></span>
+	</button>
 </div>
 
 <style>
@@ -117,53 +115,10 @@
 		gap: 0.5rem;
 	}
 
-	.svelte-icon {
-		display: flex;
-		align-items: center;
-		text-decoration: none;
-		transition: opacity 0.2s ease;
-	}
-
-	.svelte-icon:hover {
-		opacity: 0.8;
-	}
-
 	.title {
 		font-size: 1.5rem;
 		font-weight: 400;
 		margin: 0;
-	}
-
-	.nav-right {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-	}
-
-	.raised {
-		background: var(--navbar-bg);
-		border-left: 0.5px solid var(--fg-3);
-		border-top: 0.5px solid var(--fg-3);
-		border-bottom: none;
-		border-right: none;
-		border-radius: var(--border-radius);
-		color: var(--fg-1);
-		cursor: pointer;
-		transition: all 0.2s ease;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1),
-			0 1px 2px rgba(0, 0, 0, 0.06);
-		text-decoration: none;
-		font-weight: 500;
-		padding: 0.25rem 0.75rem;
-		font-size: 0.8rem;
-	}
-
-	.raised:hover {
-		border-left-color: var(--fg-2);
-		border-top-color: var(--fg-2);
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15),
-			0 2px 4px rgba(0, 0, 0, 0.1);
-		transform: translate(-1px, -1px);
 	}
 
 	.content {
@@ -171,14 +126,34 @@
 		color: var(--fg-1);
 	}
 
-	.theme-toggle {
+	.theme-toggle-fixed {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 1.8rem;
-		height: 1.8rem;
+		width: 3rem;
+		height: 3rem;
 		padding: 0;
-		min-width: 2rem;
+		background: var(--bg-2);
+		border: 2px solid var(--bg-3);
+		border-radius: 50%;
+		color: var(--fg-1);
+		cursor: pointer;
+		transition: all 0.2s ease;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15),
+			0 2px 6px rgba(0, 0, 0, 0.1);
+		z-index: 1000;
+		opacity: 0.5;
+	}
+
+	.theme-toggle-fixed:hover {
+		transform: scale(1.1);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2),
+			0 3px 8px rgba(0, 0, 0, 0.15);
+		border-color: var(--fg-2);
+		opacity: 1;
 	}
 
 	.icon {

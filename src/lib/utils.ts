@@ -1,7 +1,7 @@
-import type { Column, ColumnId } from './types';
+import type { Column, ColumnId, BoardData } from './types';
 import { Octokit } from 'octokit';
 
-const STORAGE_VERSION = '1.0';
+export const STORAGE_VERSION = '1.0';
 
 // Focus trap action for modals
 export function trapFocus(node: HTMLElement) {
@@ -63,7 +63,8 @@ export function getDefaultColumns(): Column[] {
     { id: 'inprogress', title: 'In Progress', items: [] },
     { id: 'retest', title: 'Re-Test', items: [] },
     { id: 'feedback', title: 'Feedback Needed', items: [] },
-    { id: 'done', title: 'Done', items: [] }
+    { id: 'done', title: 'Done', items: [] },
+    { id: 'cancelled', title: 'Cancelled', items: [] }
   ];
 }
 
@@ -73,13 +74,6 @@ export interface GitHubConfig {
   repo: string;
   token: string;
   branch: string;
-}
-
-export interface BoardData {
-  passwordHash: string;
-  version: string;
-  columns: Column[];
-  disableAddTask: boolean
 }
 
 export async function listAllDataFromGitHub(
@@ -113,7 +107,7 @@ export async function loadDataFromGitHub(
   config: GitHubConfig,
   customerId: string,
   password: string
-): Promise<{ success: boolean; data?: Column[]; error?: string; isNew?: boolean; sha?: string; passwordHash?: string; disableAddTask?: boolean }> {
+): Promise<{ success: boolean; data?: Column[]; error?: string; isNew?: boolean; sha?: string; passwordHash?: string; disableAddTask?: boolean; displayName?: string; uatEndDate?: string; devSiteUrl?: string }> {
   try {
     const { data: fileData } = await octokit.rest.repos.getContent({
       owner: config.owner,
@@ -126,8 +120,25 @@ export async function loadDataFromGitHub(
       throw new Error('Unexpected response format');
     }
 
-    // Decode base64 content
-    const content: BoardData = JSON.parse(atob(fileData.content));
+    let content: BoardData;
+    
+    // For large files (>1MB), GitHub returns empty content and we need to use the Blob API
+    if (!fileData.content && fileData.sha) {
+      const { data: blobData } = await octokit.rest.git.getBlob({
+        owner: config.owner,
+        repo: config.repo,
+        file_sha: fileData.sha
+      });
+      
+      // Blob API returns base64 encoded content
+      const decodedString = atob(blobData.content.replace(/\n/g, ''));
+      content = JSON.parse(decodedString);
+    } else {
+      // Decode base64 content for smaller files
+      const base64Content = fileData.content.replace(/\n/g, '');
+      const decodedString = atob(base64Content);
+      content = JSON.parse(decodedString);
+    }
 
     // Verify password
     const inputHash = await hashPassword(password);
@@ -153,7 +164,10 @@ export async function loadDataFromGitHub(
         isNew: false,
         sha: fileData.sha,
         passwordHash: content.passwordHash,
-        disableAddTask: content.disableAddTask || false
+        disableAddTask: content.disableAddTask || false,
+        displayName: content.displayName,
+        uatEndDate: content.uatEndDate,
+        devSiteUrl: content.devSiteUrl
       };
     } else {
       throw new Error('Invalid data format');
@@ -213,7 +227,7 @@ export async function loadDataFromGitHubAdmin(
   octokit: Octokit,
   config: GitHubConfig,
   customerId: string
-): Promise<{ success: boolean; data?: Column[]; error?: string; sha?: string; passwordHash?: string; disableAddTask?: boolean }> {
+): Promise<{ success: boolean; data?: Column[]; error?: string; sha?: string; passwordHash?: string; disableAddTask?: boolean; displayName?: string; uatEndDate?: string; devSiteUrl?: string }> {
   try {
     const { data: fileData } = await octokit.rest.repos.getContent({
       owner: config.owner,
@@ -226,8 +240,25 @@ export async function loadDataFromGitHubAdmin(
       throw new Error('Unexpected response format');
     }
 
-    // Decode base64 content
-    const content: BoardData = JSON.parse(atob(fileData.content));
+    let content: BoardData;
+    
+    // For large files (>1MB), GitHub returns empty content and we need to use the Blob API
+    if (!fileData.content && fileData.sha) {
+      const { data: blobData } = await octokit.rest.git.getBlob({
+        owner: config.owner,
+        repo: config.repo,
+        file_sha: fileData.sha
+      });
+      
+      // Blob API returns base64 encoded content
+      const decodedString = atob(blobData.content.replace(/\n/g, ''));
+      content = JSON.parse(decodedString);
+    } else {
+      // Decode base64 content for smaller files
+      const base64Content = fileData.content.replace(/\n/g, '');
+      const decodedString = atob(base64Content);
+      content = JSON.parse(decodedString);
+    }
 
     // Validate data format
     if (content.version === STORAGE_VERSION && content.columns) {
@@ -246,7 +277,10 @@ export async function loadDataFromGitHubAdmin(
         data: mergedColumns,
         sha: fileData.sha,
         passwordHash: content.passwordHash,
-        disableAddTask: content.disableAddTask || false
+        disableAddTask: content.disableAddTask || false,
+        displayName: content.displayName,
+        uatEndDate: content.uatEndDate,
+        devSiteUrl: content.devSiteUrl
       };
     } else {
       throw new Error('Invalid data format');

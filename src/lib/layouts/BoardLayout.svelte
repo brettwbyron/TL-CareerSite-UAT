@@ -1,8 +1,8 @@
 <script lang="ts">
-  import type { Column, Task, ModalData, Toast, TaskType, ColumnId } from '$lib/types';
+  import type { Column, Task, ModalData, Toast, TaskType, ColumnId, BoardData } from '$lib/types';
   import { Octokit } from 'octokit';
-  import { hashPassword, listAllDataFromGitHub, loadDataFromGitHub, loadDataFromGitHubAdmin, saveDataToGitHub, deleteDataFromGitHub, getDefaultColumns } from '$lib/utils';
-  import type { GitHubConfig, BoardData } from '$lib/utils';
+  import { hashPassword, listAllDataFromGitHub, loadDataFromGitHub, loadDataFromGitHubAdmin, saveDataToGitHub, deleteDataFromGitHub, getDefaultColumns, STORAGE_VERSION } from '$lib/utils';
+  import type { GitHubConfig } from '$lib/utils';
   
   // Components
   import ToastComponent from '$lib/components/Toast.svelte';
@@ -17,8 +17,7 @@
   const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || 'uat-app';
   const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || 'your-github-token';
   const GITHUB_BRANCH = import.meta.env.VITE_GITHUB_BRANCH || 'data';
-  
-  const STORAGE_VERSION = '1.0';
+  const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
 
   // Initialize Octokit
   const octokit = new Octokit({ auth: GITHUB_TOKEN });
@@ -37,8 +36,12 @@
   let passwordInput = $state('');
   let passwordError = $state('');
   let isLoading = $state(false);
+  let isSaving = $state(false);
   let fileSha = $state<string | null>(null);
   let storedPasswordHash = $state<string>(''); // Store original password hash
+  let displayName = $state<string>('');
+  let uatEndDate = $state<string>('');
+  let devSiteUrl = $state<string>('');
   
   // Admin mode
   let isAdminMode = $state(false);
@@ -93,8 +96,9 @@
       }
       
       disableAddTask = result.disableAddTask || false;
-      
-      setTimeout(() => { initialLoadComplete = true; }, 200);
+      displayName = result.displayName || '';
+      uatEndDate = result.uatEndDate || '';
+      devSiteUrl = result.devSiteUrl || '';
     }
     
     isLoading = false;
@@ -191,6 +195,7 @@
   let modalData = $state<ModalData>({
     description: '',
     type: 'Change Request',
+    device: 'All',
     feedback: '',
     section: '',
     images: []
@@ -216,8 +221,6 @@
 
   // Verify admin password
   function handleAdminPasswordSubmit() {
-    const ADMIN_PASSWORD = 'wevdeb';
-    
     if (adminPasswordInput === ADMIN_PASSWORD) {
       isAdminAuthenticated = true;
       adminPasswordError = '';
@@ -265,15 +268,15 @@
       
       // Load disableAddTask setting
       disableAddTask = result.disableAddTask || false;
+      displayName = result.displayName || '';
+      uatEndDate = result.uatEndDate || '';
+      devSiteUrl = result.devSiteUrl || '';
       
       // Don't save a customer-specific session when admin selects them
       // The admin session is sufficient, and we don't want to give admin
       // privileges to direct customer logins
       
       showToast(`Loaded ${selectedCustomerId}'s board`, 'success');
-      
-      // Mark initial load complete after data is loaded
-      setTimeout(() => { initialLoadComplete = true; }, 200);
     } else {
       showToast('Failed to load customer data', 'error');
     }
@@ -282,10 +285,13 @@
   }
   
   // Handle admin customer creation
-  async function handleAdminCreateCustomer(customerId: string, password: string) {
+  async function handleAdminCreateCustomer(customerId: string, password: string, displayName: string, uatEndDate: string, devUrl: string) {
     isLoading = true;
     
     const boardData: BoardData = {
+      displayName: displayName,
+      uatEndDate: uatEndDate,
+      devSiteUrl: devUrl,
       passwordHash: await hashPassword(password),
       version: STORAGE_VERSION,
       columns: getDefaultColumns(),
@@ -321,6 +327,20 @@
     
     isLoading = false;
   }
+  
+  // Handle account info update
+  async function handleUpdateAccountInfo(newDisplayName: string, newUatEndDate: string, newDevSiteUrl: string, newPassword: string) {
+    displayName = newDisplayName;
+    uatEndDate = newUatEndDate;
+    devSiteUrl = newDevSiteUrl;
+    
+    // Hash new password if provided, otherwise keep existing
+    if (newPassword.trim()) {
+      storedPasswordHash = await hashPassword(newPassword);
+    }
+    
+    await handleSave();
+  }
 
   // Handle password submission
   async function handlePasswordSubmit() {
@@ -351,14 +371,14 @@
       
       // Load disableAddTask setting
       disableAddTask = result.disableAddTask || false;
+      displayName = result.displayName || '';
+      uatEndDate = result.uatEndDate || '';
+      devSiteUrl = result.devSiteUrl || '';
       
       // Save session for this customer
       saveSession(id, false);
       
       showToast('Data loaded successfully', 'success');
-      
-      // Mark initial load complete after data is loaded
-      setTimeout(() => { initialLoadComplete = true; }, 200);
     } else {
       passwordError = result.error || 'Login failed';
     }
@@ -366,39 +386,38 @@
     isLoading = false;
   }
 
-  // Auto-save with debouncing
-  let saveTimeout: number | null = null;
-  let initialLoadComplete = false; // Use plain variable, not reactive state
-  
-  $effect(() => {
-    // Track both columns and disableAddTask changes
-    const _ = [columns, disableAddTask];
+  // Simple save function called after user actions
+  async function handleSave() {
+    if (!isAuthenticated || !columns || columns.length === 0 || isSaving) return;
     
-    if (isAuthenticated && columns && columns.length > 0 && initialLoadComplete) {
-      // Only auto-save after initial load is complete
+    isSaving = true;
+    
+    try {
+      const boardData: BoardData = {
+        displayName,
+        uatEndDate,
+        devSiteUrl,
+        passwordHash: storedPasswordHash,
+        version: STORAGE_VERSION,
+        columns,
+        disableAddTask
+      };
       
-      if (saveTimeout) clearTimeout(saveTimeout);
+      const id = customerId || usernameInput.toLowerCase();
+      const result = await saveDataToGitHub(octokit, githubConfig, id, boardData, 'Save changes', fileSha);
       
-      saveTimeout = setTimeout(async () => {
-        const boardData: BoardData = {
-          passwordHash: storedPasswordHash,
-          version: STORAGE_VERSION,
-          columns,
-          disableAddTask
-        };
-        
-        const id = customerId || usernameInput.toLowerCase();
-        const result = await saveDataToGitHub(octokit, githubConfig, id, boardData, 'Auto-save', fileSha);
-        
-        if (result.success && result.sha) {
+      if (result.success) {
+        if (result.sha) {
           fileSha = result.sha;
-          showToast('Changes saved', 'success');
-        } else {
-          showToast('Failed to save changes', 'error');
         }
-      }, 1000);
+        showToast('Changes saved', 'success');
+      } else {
+        showToast('Failed to save changes', 'error');
+      }
+    } finally {
+      isSaving = false;
     }
-  });
+  }
 
   // Toast functions
   function showToast(message: string, type: 'success' | 'error' | 'info' = 'info') {
@@ -461,6 +480,8 @@
 
     draggedItem = null;
     draggedFromColumn = null;
+    
+    handleSave();
   }
 
   // Modal handlers
@@ -473,6 +494,7 @@
     modalData = {
       description: '',
       type: 'Change Request',
+      device: 'All',
       feedback: '',
       section: '',
       images: []
@@ -492,6 +514,7 @@
     modalData = {
       description: item.description,
       type: item.type,
+      device: item.device,
       feedback: item.feedback || '',
       section: item.section || '',
       images: item.images || []
@@ -509,6 +532,7 @@
         task.locked = !task.locked;
         columns = [...columns]; // Trigger reactivity
         showToast(task.locked ? 'Task locked' : 'Task unlocked', 'success');
+        handleSave();
         return;
       }
     }
@@ -527,7 +551,7 @@
   }
 
   function attemptCloseModal() {
-    if (hasUnsavedChanges()) {
+    if (!isModalViewOnly && hasUnsavedChanges()) {
       showUnsavedChanges = true;
     } else {
       closeModal();
@@ -558,6 +582,7 @@
         id: Date.now(),
         description: modalData.description.trim(),
         type: modalData.type,
+        device: modalData.device,
         feedback: modalData.feedback.trim(),
         section: modalData.section.trim(),
         createdAt: now,
@@ -571,10 +596,14 @@
         targetColumn.items = [...targetColumn.items, newItem];
         columns = [...columns];
         showToast('Task added successfully', 'success');
+        closeModal();
+        handleSave();
+        return;
       }
     } else if (selectedItem) {
       selectedItem.description = modalData.description.trim();
       selectedItem.type = modalData.type;
+      selectedItem.device = modalData.device;
       selectedItem.feedback = modalData.feedback.trim();
       selectedItem.section = modalData.section.trim();
       selectedItem.images = modalData.images || [];
@@ -600,6 +629,7 @@
       }
     }
     closeModal();
+    handleSave();
   }
 
   function confirmDelete() {
@@ -613,6 +643,7 @@
         column.items = column.items.filter(item => item.id !== selectedItem!.id);
         columns = [...columns];
         showToast('Task deleted', 'info');
+        handleSave();
       }
     }
     showDeleteConfirm = false;
@@ -650,7 +681,10 @@
   />
 {:else}
   <Board
-    username={usernameInput}
+    displayName={displayName}
+    uatEndDate={uatEndDate}
+    devSiteUrl={devSiteUrl}
+    customerId={customerId || usernameInput}
     {columns}
     {isAdmin}
     bind:searchQuery
@@ -665,6 +699,8 @@
     onDrop={handleDrop}
     onDragOver={handleDragOver}
     onDragLeave={handleDragLeave}
+    onUpdateAccountInfo={handleUpdateAccountInfo}
+    onSave={handleSave}
   />
 
   <TaskModal

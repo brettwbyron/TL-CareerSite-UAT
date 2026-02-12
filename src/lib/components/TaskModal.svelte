@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { ModalData, TaskType, Column, ColumnId } from '$lib/types';
+  import { TASK_TYPES, DEVICE_TYPES } from '$lib/types';
   import { trapFocus } from '$lib/utils';
-
-  const TASK_TYPES: TaskType[] = ['Change Request', 'Issue'];
 
   let {
     show = false,
@@ -32,11 +31,14 @@
     onCancel: () => void;
   } = $props();
   
-  // Filter columns for non-admin users (exclude only inprogress)
+  // Filter columns for non-admin users (exclude inprogress, feedback, retest, and cancelled, but always include the current column)
   const availableColumns = $derived(
     isAdmin 
       ? columns 
-      : columns.filter(col => col.id !== 'inprogress')
+      : columns.filter(col => 
+          col.id === selectedColumnId || 
+          (col.id !== 'inprogress' && col.id !== 'feedback' && col.id !== 'retest' && col.id !== 'cancelled')
+        )
   );
 
   function handleOverlayClick(e: MouseEvent) {
@@ -53,11 +55,76 @@
   }
 
   // Image upload handling
-  let fileInput: HTMLInputElement;
-  const MAX_IMAGE_SIZE = 500 * 1024; // 500KB limit per image
+  let fileInput = $state<HTMLInputElement>();
+  const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10MB input limit (will be compressed)
+  const TARGET_SIZE = 800 * 1024; // Target 800KB after compression
   const MAX_IMAGES = 5;
 
   let selectedImage = $state<string | null>(null);
+  let descriptionTextarea = $state<HTMLTextAreaElement>();
+
+  // Compress image using canvas
+  async function compressImage(file: File): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          
+          // Resize if too large (max 1920px wide)
+          const MAX_WIDTH = 1920;
+          if (width > MAX_WIDTH) {
+            height = (height * MAX_WIDTH) / width;
+            width = MAX_WIDTH;
+          }
+          
+          canvas.width = width;
+          canvas.height = height;
+          
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            reject(new Error('Failed to get canvas context'));
+            return;
+          }
+          
+          ctx.drawImage(img, 0, 0, width, height);
+          
+          // Start with quality 0.9, reduce if needed
+          let quality = 0.9;
+          let result = canvas.toDataURL('image/jpeg', quality);
+          
+          // If still too large, reduce quality
+          while (result.length > TARGET_SIZE * 1.37 && quality > 0.5) { // 1.37 = base64 overhead
+            quality -= 0.1;
+            result = canvas.toDataURL('image/jpeg', quality);
+          }
+          
+          resolve(result);
+        };
+        img.onerror = () => reject(new Error('Failed to load image'));
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => reject(new Error('Failed to read file'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Auto-resize textarea based on content
+  function adjustTextareaHeight(textarea: HTMLTextAreaElement) {
+    if (!textarea) return;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  }
+
+  // Adjust height when modal opens
+  $effect(() => {
+    if (show && descriptionTextarea) {
+      adjustTextareaHeight(descriptionTextarea);
+    }
+  });
 
   function handleImageClick(image: string) {
     selectedImage = image;
@@ -67,7 +134,7 @@
     selectedImage = null;
   }
 
-  function handleImageUpload(e: Event) {
+  async function handleImageUpload(e: Event) {
     const target = e.target as HTMLInputElement;
     const files = target.files;
     if (!files || files.length === 0) return;
@@ -81,9 +148,9 @@
       return;
     }
 
-    // Check file size
+    // Check file size before processing
     if (file.size > MAX_IMAGE_SIZE) {
-      alert(`Image is too large. Maximum size is ${MAX_IMAGE_SIZE / 1024}KB`);
+      alert(`Image is too large. Maximum size is ${MAX_IMAGE_SIZE / 1024 / 1024}MB`);
       target.value = '';
       return;
     }
@@ -95,13 +162,16 @@
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const base64 = event.target?.result as string;
-      modalData.images = [...modalData.images, base64];
+    try {
+      // Compress the image
+      const compressed = await compressImage(file);
+      modalData.images = [...modalData.images, compressed];
       target.value = ''; // Reset input
-    };
-    reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error processing image:', error);
+      alert('Failed to process image. Please try another file.');
+      target.value = '';
+    }
   }
 
   function removeImage(index: number) {
@@ -140,11 +210,22 @@
           </select>
         </div>
 
+        {#if isAdmin}
+           <div class="form-group">
+             <label for="type">Type *</label>
+             <select id="type" bind:value={modalData.type} disabled={isViewOnly || (isLocked && !isAdmin)}>
+               {#each TASK_TYPES as type}
+                 <option value="{type}">{type}</option>
+               {/each}
+             </select>
+           </div>
+        {/if}
+
         <div class="form-group">
-          <label for="type">Type *</label>
-          <select id="type" bind:value={modalData.type} disabled={isViewOnly || (isLocked && !isAdmin)}>
-            {#each TASK_TYPES as type}
-              <option value="{type}">{type}</option>
+          <label for="device">Device</label>
+          <select id="device" bind:value={modalData.device} disabled={isViewOnly || isLocked}>
+            {#each DEVICE_TYPES as device}
+              <option value="{device}">{device}</option>
             {/each}
           </select>
         </div>
@@ -153,8 +234,9 @@
           <label for="description">Description *</label>
           <textarea 
             id="description"
+            bind:this={descriptionTextarea}
             bind:value={modalData.description}
-            rows="4"
+            oninput={(e) => adjustTextareaHeight(e.currentTarget)}
             maxlength="500"
             placeholder="Enter task description..."
             disabled={isViewOnly || (isLocked && !isAdmin)}
@@ -188,7 +270,7 @@
         </div>
 
         <div class="form-group">
-          <label>Images ({modalData.images.length}/{MAX_IMAGES})</label>
+          <div class="label">Images ({modalData.images.length}/{MAX_IMAGES})</div>
           {#if modalData.images.length > 0}
             <div class="image-preview-container">
               {#each modalData.images as image, index}
@@ -226,15 +308,15 @@
               disabled={isViewOnly}
               readonly={isViewOnly}
             />
-            {#if (!isViewOnly && !isLocked) || isAdmin}
+            {#if (!isViewOnly) || isAdmin}
               <button 
                 type="button" 
                 class="upload-btn"
-                onclick={() => fileInput.click()}
+                onclick={() => fileInput?.click()}
               >
                 + Add Image
               </button>
-              <small>Max {MAX_IMAGE_SIZE / 1024}KB per image, {MAX_IMAGES} images total</small>
+              <small>Max {MAX_IMAGE_SIZE / 1024 / 1024}MB per image (auto-compressed), {MAX_IMAGES} images total</small>
             {/if}
           {/if}
         </div>
@@ -371,6 +453,12 @@
     color: var(--fg-1);
     font-family: inherit;
     box-sizing: border-box;
+  }
+
+  .form-group textarea {
+    min-height: 4rem;
+    resize: none;
+    overflow-y: hidden;
   }
 
   .form-group input:focus,
