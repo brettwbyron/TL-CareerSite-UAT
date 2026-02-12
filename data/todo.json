@@ -79,7 +79,7 @@
           "id": 1770911350200,
           "description": "Remove image thumbnails from card view and replace with icon and number.",
           "type": "Change Request",
-          "feedback": "I like the quick preview of if/what images are attached. Do you think it's too much? I can put an icon with a number instead.",
+          "feedback": "I like the quick preview of if/what images are attached, but I'm biased here. Let me know if you think it's too much, because I can put an icon with a number instead.",
           "section": "Task Card",
           "createdAt": "2026-02-12T15:49:10.200Z",
           "updatedAt": "2026-02-12T15:49:10.200Z",
