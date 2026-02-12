@@ -38,11 +38,6 @@
     {
       "id": "inprogress",
       "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "retest",
-      "title": "Re-Test",
       "items": [
         {
           "id": 1770830564907,
@@ -57,6 +52,11 @@
           "device": "All"
         }
       ]
+    },
+    {
+      "id": "retest",
+      "title": "Re-Test",
+      "items": []
     },
     {
       "id": "feedback",
