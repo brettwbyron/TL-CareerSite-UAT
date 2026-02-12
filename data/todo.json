@@ -25,7 +25,7 @@
           "description": "Remove image thumbnails from card view and replace with icon and number.",
           "type": "Change Request",
           "feedback": "I like the quick preview of if/what images are attached. If it makes the UAT task cards look bad when there are many tasks with images, I may come back to this, but am cancelling it for now.",
-          "section": "Task Card",
+          "section": "TaskCard",
           "createdAt": "2026-02-12T15:49:10.200Z",
           "updatedAt": "2026-02-12T15:49:10.200Z",
           "locked": false,
