@@ -4,7 +4,6 @@
   "devSiteUrl": "somelink-dev.ttcportals.com",
   "passwordHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
   "version": "1.0",
-  "disableAddTask": false,
   "columns": [
     {
       "id": "todo",
@@ -79,6 +78,18 @@
           "section": "",
           "createdAt": "2026-02-12T21:30:47.404Z",
           "updatedAt": "2026-02-12T21:30:47.404Z",
+          "locked": false,
+          "images": []
+        },
+        {
+          "id": 1770931976846,
+          "description": "Set up data in its own private repo for more security",
+          "type": "Feature",
+          "device": "All",
+          "feedback": "",
+          "section": "Data",
+          "createdAt": "2026-02-12T21:32:56.846Z",
+          "updatedAt": "2026-02-12T21:32:56.846Z",
           "locked": false,
           "images": []
         }
@@ -179,5 +190,6 @@
       "title": "Cancelled",
       "items": []
     }
-  ]
+  ],
+  "disableAddTask": false
 }
