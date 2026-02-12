@@ -18,7 +18,8 @@
           "createdAt": "2026-02-11T17:25:50.701Z",
           "updatedAt": "2026-02-11T17:25:50.701Z",
           "locked": false,
-          "images": []
+          "images": [],
+          "device": "All"
         }
       ]
     },
