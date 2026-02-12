@@ -20,18 +20,6 @@
           "locked": false,
           "images": [],
           "device": "All"
-        },
-        {
-          "id": 1770830629992,
-          "description": "Make the \"type\" completely admin only. Customers don't know the difference and we usually have to set this ourselves anyway.",
-          "type": "Change Request",
-          "feedback": "",
-          "section": "TaskModal",
-          "createdAt": "2026-02-11T17:23:49.992Z",
-          "updatedAt": "2026-02-11T17:23:49.992Z",
-          "locked": false,
-          "images": [],
-          "device": "All"
         }
       ]
     },
@@ -94,6 +82,18 @@
           "section": "TaskCard",
           "createdAt": "2026-02-11T17:21:12.908Z",
           "updatedAt": "2026-02-11T17:21:12.908Z",
+          "locked": true,
+          "images": [],
+          "device": "All"
+        },
+        {
+          "id": 1770830629992,
+          "description": "Make the \"type\" completely admin only. Customers don't know the difference and we usually have to set this ourselves anyway.",
+          "type": "Change Request",
+          "feedback": "",
+          "section": "TaskModal",
+          "createdAt": "2026-02-11T17:23:49.992Z",
+          "updatedAt": "2026-02-11T17:23:49.992Z",
           "locked": true,
           "images": [],
           "device": "All"
