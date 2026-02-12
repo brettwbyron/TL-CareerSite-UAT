@@ -23,7 +23,7 @@
         },
         {
           "id": 1770830629992,
-          "description": "Make the \"type\" completely admin only. Customers don't know the difference and we usually have to set this ourselves anyway.",
+          "description": "Make the type (Change Request, Issue, Feature) completely admin only. Customers don't know the difference and we usually have to set this ourselves anyway.",
           "type": "Change Request",
           "feedback": "",
           "section": "TaskModal",
