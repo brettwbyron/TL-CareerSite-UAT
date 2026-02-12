@@ -30,7 +30,8 @@
           "createdAt": "2026-02-11T17:23:49.992Z",
           "updatedAt": "2026-02-11T17:23:49.992Z",
           "locked": false,
-          "images": []
+          "images": [],
+          "device": "All"
         },
         {
           "id": 1770830472908,
