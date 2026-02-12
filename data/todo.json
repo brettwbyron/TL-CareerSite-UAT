@@ -30,6 +30,11 @@
     {
       "id": "retest",
       "title": "Re-Test",
+      "items": []
+    },
+    {
+      "id": "feedback",
+      "title": "Feedback Needed",
       "items": [
         {
           "id": 1770830564907,
@@ -43,11 +48,6 @@
           "images": []
         }
       ]
-    },
-    {
-      "id": "feedback",
-      "title": "Feedback Needed",
-      "items": []
     },
     {
       "id": "done",
