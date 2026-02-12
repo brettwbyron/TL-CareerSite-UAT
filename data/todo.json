@@ -25,16 +25,6 @@
     {
       "id": "inprogress",
       "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "retest",
-      "title": "Re-Test",
-      "items": []
-    },
-    {
-      "id": "feedback",
-      "title": "Feedback Needed",
       "items": [
         {
           "id": 1770830564907,
@@ -46,7 +36,18 @@
           "updatedAt": "2026-02-11T17:22:44.907Z",
           "locked": true,
           "images": []
-        },
+        }
+      ]
+    },
+    {
+      "id": "retest",
+      "title": "Re-Test",
+      "items": []
+    },
+    {
+      "id": "feedback",
+      "title": "Feedback Needed",
+      "items": [
         {
           "id": 1770911350200,
           "description": "Remove image thumbnails from card view and replace with icon and number.",
