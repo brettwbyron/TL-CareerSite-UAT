@@ -56,6 +56,18 @@
           "updatedAt": "2026-02-12T21:17:09.296Z",
           "locked": false,
           "images": []
+        },
+        {
+          "id": 1770931780040,
+          "description": "Don't default all task types to \"Change Request\" on creation",
+          "type": "Bug",
+          "device": "All",
+          "feedback": "",
+          "section": "TaskModal",
+          "createdAt": "2026-02-12T21:29:40.039Z",
+          "updatedAt": "2026-02-12T21:29:40.039Z",
+          "locked": false,
+          "images": []
         }
       ]
     },
