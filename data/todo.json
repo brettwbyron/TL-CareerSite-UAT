@@ -20,18 +20,6 @@
           "locked": false,
           "images": [],
           "device": "All"
-        },
-        {
-          "id": 1770925702634,
-          "description": "Add customer name, UAT deadline and dev link info.",
-          "type": "Feature",
-          "device": "All",
-          "feedback": "Add a way to edit this in the admin UI",
-          "section": "Top section",
-          "createdAt": "2026-02-12T19:48:22.634Z",
-          "updatedAt": "2026-02-12T19:48:22.634Z",
-          "locked": false,
-          "images": []
         }
       ]
     },
@@ -68,6 +56,18 @@
           "locked": true,
           "images": [],
           "device": "All"
+        },
+        {
+          "id": 1770925702634,
+          "description": "Add customer name, UAT deadline and dev link info.",
+          "type": "Feature",
+          "device": "All",
+          "feedback": "Add a way to edit this in the admin UI",
+          "section": "Top section",
+          "createdAt": "2026-02-12T19:48:22.634Z",
+          "updatedAt": "2026-02-12T19:48:22.634Z",
+          "locked": true,
+          "images": []
         }
       ]
     },
