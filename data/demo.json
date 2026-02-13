@@ -4,7 +4,6 @@
   "devSiteUrl": "democareers-dev.ttcportals.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
   "version": "1.0",
-  "disableAddTask": false,
   "columns": [
     {
       "id": "todo",
@@ -46,18 +45,6 @@
           "locked": false,
           "images": [],
           "type": "Feature"
-        },
-        {
-          "id": 1771009078123,
-          "description": "Test add task while updates were made in background. This should merge data and cause no issues.",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "",
-          "section": "",
-          "createdAt": "2026-02-13T18:57:58.123Z",
-          "updatedAt": "2026-02-13T18:57:58.123Z",
-          "locked": false,
-          "images": []
         }
       ]
     },
@@ -98,5 +85,6 @@
       "title": "Cancelled",
       "items": []
     }
-  ]
+  ],
+  "disableAddTask": false
 }
