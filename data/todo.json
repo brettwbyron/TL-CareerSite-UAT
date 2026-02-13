@@ -141,6 +141,18 @@
           "updatedAt": "2026-02-12T19:48:22.634Z",
           "locked": true,
           "images": []
+        },
+        {
+          "id": 1770931847405,
+          "description": "Add \"merge before saving\" feature.",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "Adding items at the same time works great. Updating items does not work. Deleting items that aren't updated at the same time might work.",
+          "section": "",
+          "createdAt": "2026-02-12T21:30:47.404Z",
+          "updatedAt": "2026-02-12T21:30:47.404Z",
+          "locked": true,
+          "images": []
         }
       ]
     },
