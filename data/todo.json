@@ -70,18 +70,6 @@
           "images": []
         },
         {
-          "id": 1770931847405,
-          "description": "Add \"merge before saving\" feature.",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "Adding and updating should work okay, but deleting at the same time probably won't actually delete anything",
-          "section": "",
-          "createdAt": "2026-02-12T21:30:47.404Z",
-          "updatedAt": "2026-02-12T21:30:47.404Z",
-          "locked": false,
-          "images": []
-        },
-        {
           "id": 1770931976846,
           "description": "Set up data in its own private repo for more security",
           "type": "Feature",
@@ -110,6 +98,18 @@
           "locked": true,
           "images": [],
           "device": "All"
+        },
+        {
+          "id": 1770931847405,
+          "description": "Add \"merge before saving\" feature.",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "Adding and updating should work okay, but deleting at the same time probably won't actually delete anything",
+          "section": "",
+          "createdAt": "2026-02-12T21:30:47.404Z",
+          "updatedAt": "2026-02-12T21:30:47.404Z",
+          "locked": true,
+          "images": []
         }
       ]
     },
