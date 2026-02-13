@@ -4,7 +4,6 @@
   "devSiteUrl": "democareers-dev.ttcportals.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
   "version": "1.0",
-  "disableAddTask": false,
   "columns": [
     {
       "id": "todo",
@@ -46,18 +45,6 @@
           "updatedAt": "2026-02-13T18:07:08.954Z",
           "locked": false,
           "images": []
-        },
-        {
-          "id": 1771006104238,
-          "description": "Testing removal of default type on creation",
-          "device": "All",
-          "feedback": "",
-          "section": "",
-          "createdAt": "2026-02-13T18:08:24.238Z",
-          "updatedAt": "2026-02-13T18:08:24.238Z",
-          "locked": false,
-          "images": [],
-          "type": "Feature"
         }
       ]
     },
@@ -98,5 +85,6 @@
       "title": "Cancelled",
       "items": []
     }
-  ]
+  ],
+  "disableAddTask": false
 }
