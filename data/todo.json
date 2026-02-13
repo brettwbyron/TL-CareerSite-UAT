@@ -4,6 +4,7 @@
   "devSiteUrl": "somelink-dev.ttcportals.com",
   "passwordHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
   "version": "1.0",
+  "disableAddTask": false,
   "columns": [
     {
       "id": "todo",
@@ -188,8 +189,20 @@
     {
       "id": "cancelled",
       "title": "Cancelled",
-      "items": []
+      "items": [
+        {
+          "id": 1770830750701,
+          "description": "Multiple UAT instances for single accounts. If a customer has multi-lingual, internal/external, subsidiaries, etc., it could be nice to not have to create a new account each time and have all UATs in one account.",
+          "type": "Feature",
+          "feedback": "This is probably possible in the future, but would require a significant refactor of how data is handled so I'm going to cancel this for this version.",
+          "section": "App",
+          "createdAt": "2026-02-11T17:25:50.701Z",
+          "updatedAt": "2026-02-11T17:25:50.701Z",
+          "locked": true,
+          "images": [],
+          "device": "All"
+        }
+      ]
     }
-  ],
-  "disableAddTask": false
+  ]
 }
