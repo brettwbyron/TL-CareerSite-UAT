@@ -39,13 +39,25 @@
           "id": 1771008879001,
           "description": "Testing removal of default type on creation",
           "device": "All",
-          "feedback": "Testing update of task that was updated by someone else before reloading.",
+          "feedback": "",
           "section": "",
           "createdAt": "2026-02-13T18:54:39.001Z",
           "updatedAt": "2026-02-13T18:54:39.001Z",
           "locked": false,
           "images": [],
-          "type": "Change Request"
+          "type": "Feature"
+        },
+        {
+          "id": 1771009078123,
+          "description": "Test add task while updates were made in background. This should merge data and cause no issues.",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "",
+          "section": "",
+          "createdAt": "2026-02-13T18:57:58.123Z",
+          "updatedAt": "2026-02-13T18:57:58.123Z",
+          "locked": false,
+          "images": []
         }
       ]
     },
