@@ -18,7 +18,9 @@
           "section": "All pages",
           "createdAt": "2026-02-05T21:19:12.344Z",
           "updatedAt": "2026-02-05T21:19:12.344Z",
-          "locked": false
+          "locked": false,
+          "images": [],
+          "device": "All"
         },
         {
           "id": 1770408343395,
