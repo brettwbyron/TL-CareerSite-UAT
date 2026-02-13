@@ -39,13 +39,13 @@
           "id": 1771008879001,
           "description": "Testing removal of default type on creation",
           "device": "All",
-          "feedback": "",
+          "feedback": "Testing update of task that was updated by someone else before reloading.",
           "section": "",
           "createdAt": "2026-02-13T18:54:39.001Z",
           "updatedAt": "2026-02-13T18:54:39.001Z",
           "locked": false,
           "images": [],
-          "type": "Feature"
+          "type": "Change Request"
         }
       ]
     },
