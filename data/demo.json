@@ -44,6 +44,17 @@
           "updatedAt": "2026-02-13T18:07:08.954Z",
           "locked": false,
           "images": []
+        },
+        {
+          "id": 1771006104238,
+          "description": "Testing removal of default type on creation",
+          "device": "All",
+          "feedback": "",
+          "section": "",
+          "createdAt": "2026-02-13T18:08:24.238Z",
+          "updatedAt": "2026-02-13T18:08:24.238Z",
+          "locked": false,
+          "images": []
         }
       ]
     },
