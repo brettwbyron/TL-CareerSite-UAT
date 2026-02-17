@@ -20,18 +20,6 @@
           "updatedAt": "2026-02-17T15:47:54.820Z",
           "locked": false,
           "images": []
-        },
-        {
-          "id": 1771343279300,
-          "description": "task 3",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "",
-          "section": "",
-          "createdAt": "2026-02-17T15:47:59.300Z",
-          "updatedAt": "2026-02-17T15:47:59.300Z",
-          "locked": false,
-          "images": []
         }
       ]
     },
