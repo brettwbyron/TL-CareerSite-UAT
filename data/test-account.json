@@ -20,6 +20,18 @@
           "locked": false,
           "images": [],
           "type": "Change Request"
+        },
+        {
+          "id": 1771343071665,
+          "description": "task 1",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "",
+          "section": "",
+          "createdAt": "2026-02-17T15:44:31.665Z",
+          "updatedAt": "2026-02-17T15:44:31.665Z",
+          "locked": true,
+          "images": []
         }
       ]
     },
@@ -36,20 +48,7 @@
     {
       "id": "feedback",
       "title": "Feedback Needed",
-      "items": [
-        {
-          "id": 1771343071665,
-          "description": "task 1",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "",
-          "section": "",
-          "createdAt": "2026-02-17T15:44:31.665Z",
-          "updatedAt": "2026-02-17T15:44:31.665Z",
-          "locked": true,
-          "images": []
-        }
-      ]
+      "items": []
     },
     {
       "id": "done",
