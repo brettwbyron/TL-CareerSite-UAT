@@ -10,18 +10,6 @@
       "title": "To Do",
       "items": [
         {
-          "id": 1771343946396,
-          "description": "task 2",
-          "device": "All",
-          "feedback": "",
-          "section": "",
-          "createdAt": "2026-02-17T15:59:06.396Z",
-          "updatedAt": "2026-02-17T15:59:06.396Z",
-          "locked": false,
-          "images": [],
-          "type": "Change Request"
-        },
-        {
           "id": 1771343950927,
           "description": "task 3",
           "device": "All",
@@ -43,7 +31,20 @@
     {
       "id": "retest",
       "title": "Re-Test",
-      "items": []
+      "items": [
+        {
+          "id": 1771343946396,
+          "description": "task 2",
+          "device": "All",
+          "feedback": "",
+          "section": "",
+          "createdAt": "2026-02-17T15:59:06.396Z",
+          "updatedAt": "2026-02-17T15:59:06.396Z",
+          "locked": true,
+          "images": [],
+          "type": "Change Request"
+        }
+      ]
     },
     {
       "id": "feedback",
