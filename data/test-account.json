@@ -20,18 +20,7 @@
           "locked": false,
           "images": [],
           "type": "Change Request"
-        }
-      ]
-    },
-    {
-      "id": "inprogress",
-      "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "retest",
-      "title": "Re-Test",
-      "items": [
+        },
         {
           "id": 1771343946396,
           "description": "task 2",
@@ -45,6 +34,16 @@
           "type": "Change Request"
         }
       ]
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress",
+      "items": []
+    },
+    {
+      "id": "retest",
+      "title": "Re-Test",
+      "items": []
     },
     {
       "id": "feedback",
