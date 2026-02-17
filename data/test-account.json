@@ -20,6 +20,18 @@
           "updatedAt": "2026-02-17T15:44:31.665Z",
           "locked": true,
           "images": []
+        },
+        {
+          "id": 1771343950927,
+          "description": "task 3",
+          "device": "All",
+          "feedback": "",
+          "section": "",
+          "createdAt": "2026-02-17T15:59:10.926Z",
+          "updatedAt": "2026-02-17T15:59:10.926Z",
+          "locked": true,
+          "images": [],
+          "type": "Change Request"
         }
       ]
     },
@@ -36,20 +48,7 @@
     {
       "id": "feedback",
       "title": "Feedback Needed",
-      "items": [
-        {
-          "id": 1771343950927,
-          "description": "task 3",
-          "device": "All",
-          "feedback": "",
-          "section": "",
-          "createdAt": "2026-02-17T15:59:10.926Z",
-          "updatedAt": "2026-02-17T15:59:10.926Z",
-          "locked": true,
-          "images": [],
-          "type": "Change Request"
-        }
-      ]
+      "items": []
     },
     {
       "id": "done",
