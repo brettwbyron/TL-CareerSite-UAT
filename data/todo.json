@@ -79,18 +79,6 @@
           "locked": true,
           "images": [],
           "device": "All"
-        },
-        {
-          "id": 1770931780040,
-          "description": "Don't default all task types to \"Change Request\" on creation",
-          "type": "Issue",
-          "device": "All",
-          "feedback": "",
-          "section": "TaskModal",
-          "createdAt": "2026-02-12T21:29:40.039Z",
-          "updatedAt": "2026-02-12T21:29:40.039Z",
-          "locked": true,
-          "images": []
         }
       ]
     },
@@ -167,6 +155,18 @@
           "section": "Top section",
           "createdAt": "2026-02-12T19:48:22.634Z",
           "updatedAt": "2026-02-12T19:48:22.634Z",
+          "locked": true,
+          "images": []
+        },
+        {
+          "id": 1770931780040,
+          "description": "Don't default all task types to \"Change Request\" on creation",
+          "type": "Issue",
+          "device": "All",
+          "feedback": "",
+          "section": "TaskModal",
+          "createdAt": "2026-02-12T21:29:40.039Z",
+          "updatedAt": "2026-02-12T21:29:40.039Z",
           "locked": true,
           "images": []
         }
