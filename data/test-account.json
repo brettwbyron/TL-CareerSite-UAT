@@ -30,7 +30,8 @@
           "createdAt": "2026-02-17T15:59:10.926Z",
           "updatedAt": "2026-02-17T15:59:10.926Z",
           "locked": false,
-          "images": []
+          "images": [],
+          "type": "Change Request"
         }
       ]
     },
