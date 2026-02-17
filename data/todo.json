@@ -44,13 +44,7 @@
           "updatedAt": "2026-02-12T21:32:56.846Z",
           "locked": false,
           "images": []
-        }
-      ]
-    },
-    {
-      "id": "inprogress",
-      "title": "In Progress",
-      "items": [
+        },
         {
           "id": 1770931847405,
           "description": "Add \"merge before saving\" feature.",
@@ -64,6 +58,11 @@
           "images": []
         }
       ]
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress",
+      "items": []
     },
     {
       "id": "retest",
