@@ -17,7 +17,7 @@
           "section": "",
           "createdAt": "2026-02-17T15:59:06.396Z",
           "updatedAt": "2026-02-17T15:59:06.396Z",
-          "locked": false,
+          "locked": true,
           "images": [],
           "type": "Change Request"
         },
