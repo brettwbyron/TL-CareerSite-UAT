@@ -4,7 +4,6 @@
   "devSiteUrl": "somelink-dev.ttcportals.com",
   "passwordHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
   "version": "1.0",
-  "disableAddTask": false,
   "columns": [
     {
       "id": "todo",
@@ -21,18 +20,6 @@
           "locked": false,
           "images": [],
           "device": "All"
-        },
-        {
-          "id": 1770930352848,
-          "description": "Add Employ Logo at the top since we should represent that we are apart of that. I think there is a marketing site for that?",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "",
-          "section": "Header",
-          "createdAt": "2026-02-12T21:05:52.848Z",
-          "updatedAt": "2026-02-12T21:05:52.848Z",
-          "locked": false,
-          "images": []
         },
         {
           "id": 1770930661810,
@@ -195,6 +182,18 @@
           "locked": true,
           "images": [],
           "device": "All"
+        },
+        {
+          "id": 1770930352848,
+          "description": "Add Employ Logo at the top since we should represent that we are apart of that. I think there is a marketing site for that?",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "",
+          "section": "Header",
+          "createdAt": "2026-02-12T21:05:52.848Z",
+          "updatedAt": "2026-02-12T21:05:52.848Z",
+          "locked": true,
+          "images": []
         }
       ]
     },
@@ -216,5 +215,6 @@
         }
       ]
     }
-  ]
+  ],
+  "disableAddTask": false
 }
