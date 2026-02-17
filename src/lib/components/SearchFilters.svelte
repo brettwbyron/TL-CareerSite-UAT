@@ -1,17 +1,20 @@
 <script lang="ts">
   import type { TaskType } from '$lib/types';
   import { TASK_TYPES } from '$lib/types';
+  import ButtonComponent from './Button.svelte';
 
   let {
     searchQuery = $bindable<string>(''),
     filterType = $bindable<TaskType | 'All'>('All'),
     disableAddTask = false,
-    onAddTask
+    onAddTask,
+    onHelp
   }: {
     searchQuery: string;
     filterType: TaskType | 'All';
     disableAddTask?: boolean;
     onAddTask: () => void;
+    onHelp: () => void;
   } = $props();
 </script>
 
@@ -32,14 +35,23 @@
   </div>
 
   <div class="action-buttons">
-    <button 
-      class="add-task-btn" 
-      onclick={onAddTask}
-      disabled={disableAddTask}
+    <ButtonComponent 
+      element="button"
+      text="Help"
+      title="View status guide"
+      type="hollow-primary"
+      size="small"
+      onClick={onHelp}
+    />
+    <ButtonComponent 
+      element="button"
+      text="+ Add Task"
       title={disableAddTask ? 'UAT item creation disabled - The UAT process is now in the Fixing stage where created items are being worked on. No new items can be added at this time.' : 'Add a new task'}
-    >
-      + Add Task
-    </button>
+      type="primary"
+      size="small"
+      disabled={disableAddTask}
+      onClick={onAddTask}
+    />
   </div>
 </div>
 
@@ -61,66 +73,45 @@
   .search-input {
     flex: 1;
     padding: 0.75rem;
-    border: 2px solid var(--bg-3);
-    border-radius: 4px;
+    border: 1px solid var(--bg-3);
+    border-radius: var(--border-radius);
     font-size: 1rem;
     background: var(--bg-2);
     color: var(--fg-1);
     box-sizing: border-box;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
   }
 
   .search-input:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .filter-select {
     padding: 0.75rem;
-    border: 2px solid var(--bg-3);
-    border-radius: 4px;
+    border: 1px solid var(--bg-3);
+    border-radius: var(--border-radius);
     font-size: 1rem;
     background: var(--bg-2);
     color: var(--fg-1);
     box-sizing: border-box;
     cursor: pointer;
     min-width: 150px;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
   }
 
   .filter-select:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .action-buttons {
     display: flex;
     gap: 0.75rem;
-  }
-
-  .add-task-btn {
-    padding: 0.75rem 1.5rem;
-    background: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-
-  .add-task-btn:hover {
-    background: #45a049;
-  }
-
-  .add-task-btn:disabled {
-    background: #9e9e9e;
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  .add-task-btn:disabled:hover {
-    background: #9e9e9e;
   }
 
   @media (max-width: 768px) {
@@ -139,10 +130,6 @@
     }
 
     .action-buttons {
-      width: 100%;
-    }
-
-    .add-task-btn {
       width: 100%;
     }
   }

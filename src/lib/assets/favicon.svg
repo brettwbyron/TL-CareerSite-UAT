@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 180 180">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #8f3db8;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="3.28" y1="176.72" x2="176.73" y2="3.27" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b1e9f8"/>
+      <stop offset="1" stop-color="#85c4e6"/>
+    </linearGradient>
+  </defs>
+  <g id="favicon">
+    <g id="favicon-2" data-name="favicon">
+      <rect id="bg" class="cls-2" width="180" height="180" rx="12.9" ry="12.9"/>
+      <path id="e" class="cls-1" d="M140.51,98.74h-63.45c1.34,3.43,3.57,6.08,6.68,7.91s7.02,2.75,11.68,2.75c4,0,7.38-.49,10.1-1.5,2.72-1,5.71-2.72,8.93-5.16l19.7,19.81c-8.91,9.76-22.2,14.64-39.91,14.64-11.02,0-20.7-2.03-29.05-6.08-8.35-4.05-14.81-9.68-19.37-16.89-4.56-7.2-6.83-15.3-6.83-24.29s2.26-17.22,6.76-24.38c4.52-7.16,10.69-12.74,18.53-16.73s16.67-5.99,26.46-5.99c9.24,0,17.67,1.83,25.29,5.49,7.62,3.66,13.7,9.05,18.2,16.14,4.5,7.1,6.76,15.59,6.76,25.46,0,.56-.17,3.5-.5,8.82h.01,0ZM81.4,71.62c-2.56,2.12-4.23,5.1-5.01,8.99h29.38c-.78-3.76-2.46-6.74-5.01-8.9s-5.8-3.24-9.68-3.24-7.12,1.05-9.68,3.17v-.02h0Z"/>
+    </g>
+  </g>
+</svg>

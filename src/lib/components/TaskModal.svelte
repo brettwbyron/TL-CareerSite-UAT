@@ -3,6 +3,8 @@
   import { TASK_TYPES, DEVICE_TYPES } from '$lib/types';
   import { trapFocus } from '$lib/utils';
 
+  import ButtonComponent from '$lib/components/Button.svelte';
+
   let {
     show = false,
     isNew = false,
@@ -309,14 +311,14 @@
               readonly={isViewOnly}
             />
             {#if (!isViewOnly) || isAdmin}
-              <button 
-                type="button" 
-                class="upload-btn"
-                onclick={() => fileInput?.click()}
-              >
-                + Add Image
-              </button>
-              <small>Max {MAX_IMAGE_SIZE / 1024 / 1024}MB per image (auto-compressed), {MAX_IMAGES} images total</small>
+              <ButtonComponent 
+                element="button"
+                text="+ Attach Image"
+                type="secondary"
+                size="small"
+                onClick={() => fileInput?.click()}
+              />
+              <small>Max {MAX_IMAGE_SIZE / 1024 / 1024}MB per image, {MAX_IMAGES} images total</small>
             {/if}
           {/if}
         </div>
@@ -331,20 +333,29 @@
                 <span>Task locked - Work has been started. Only status and feedback can be changed.</span>
               </div>
             {:else if !isLocked || isAdmin}
-              <button 
-                class="delete-btn-modal" 
-                onclick={onDelete}
-                aria-label="Delete task"
-              >
-                Delete
-              </button>
+              <ButtonComponent 
+                element="button"
+                text="Delete"
+                type="delete"
+                onClick={onDelete}
+              />
             {/if}
           {/if}
         </div>
         <div class="modal-footer-right">
-          <button class="cancel-btn" onclick={onCancel}>{isViewOnly ? 'Close' : 'Cancel'}</button>
+          <ButtonComponent 
+            element="button"
+            text={isViewOnly ? 'Close' : 'Cancel'}
+            type="cancel"
+            onClick={onCancel}
+          />
           {#if !isViewOnly}
-            <button class="save-btn" onclick={onSave}>Save</button>
+            <ButtonComponent 
+              element="button"
+              text="Save"
+              type="primary"
+              onClick={onSave}
+            />
           {/if}
         </div>
       </div>
@@ -434,7 +445,8 @@
     margin-bottom: 1.5rem;
   }
 
-  .form-group label {
+  .form-group label,
+  .form-group .label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--fg-1);
@@ -465,7 +477,8 @@
   .form-group select:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .form-group input:disabled,
@@ -525,43 +538,6 @@
     gap: 0.75rem;
   }
 
-  .modal-footer button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .cancel-btn {
-    background: var(--bg-3);
-    color: var(--fg-1);
-  }
-
-  .cancel-btn:hover {
-    background: var(--bg-1);
-  }
-
-  .save-btn {
-    background: #4CAF50;
-    color: white;
-  }
-
-  .save-btn:hover {
-    background: #45a049;
-  }
-
-  .delete-btn-modal {
-    background: #f44336;
-    color: white;
-  }
-
-  .delete-btn-modal:hover {
-    background: #d32f2f;
-  }
-
   .lock-message {
     display: flex;
     align-items: center;
@@ -582,23 +558,6 @@
 
   .file-input {
     display: none;
-  }
-
-  .upload-btn {
-    padding: 0.5rem 1rem;
-    background: #2196F3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: background 0.2s;
-    margin-bottom: 0.5rem;
-  }
-
-  .upload-btn:hover {
-    background: #1976D2;
   }
 
   .image-preview-container {
@@ -727,10 +686,6 @@
 
     .modal-footer-left,
     .modal-footer-right {
-      width: 100%;
-    }
-
-    .modal-footer button {
       width: 100%;
     }
   }

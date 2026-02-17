@@ -1,4 +1,4 @@
-import type { Column, ColumnId, BoardData } from './types';
+import type { Column, ColumnId, BoardData, Task } from './types';
 import { Octokit } from 'octokit';
 
 export const STORAGE_VERSION = '1.0';
@@ -175,7 +175,8 @@ export async function loadDataFromGitHub(
   } catch (error: any) {
     if (error.status === 404) {
       return {
-        success: false
+        success: false,
+        error: 'Account not found. Please check your username and try again.'
       };
     }
 
@@ -193,8 +194,12 @@ export async function saveDataToGitHub(
   customerId: string,
   data: BoardData,
   message: string = 'Update board data',
-  fileSha?: string | null
+  fileSha?: string | null,
+  retryCount: number = 0
 ): Promise<{ success: boolean; sha?: string; error?: string }> {
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY_MS = 500; // Start with 500ms
+  
   try {
     const params: any = {
       owner: config.owner,
@@ -214,11 +219,46 @@ export async function saveDataToGitHub(
       success: true, 
       sha: result.content?.sha
     };
-  } catch (error) {
-    console.error('Failed to save data:', error);
+  } catch (error: any) {
+    // Handle 409 Conflict errors with retry logic
+    if (error.status === 409 && retryCount < MAX_RETRIES) {
+      console.log(`Save conflict detected, retrying (${retryCount + 1}/${MAX_RETRIES})...`);
+      
+      // Wait with exponential backoff before retrying
+      const delay = RETRY_DELAY_MS * Math.pow(2, retryCount);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      
+      // Fetch latest SHA for retry
+      try {
+        const { data: fileData } = await octokit.rest.repos.getContent({
+          owner: config.owner,
+          repo: config.repo,
+          path: `data/${customerId.toLowerCase()}.json`,
+          ref: config.branch
+        });
+        
+        if (!Array.isArray(fileData) && 'sha' in fileData) {
+          // Retry with latest SHA
+          return saveDataToGitHub(octokit, config, customerId, data, message, fileData.sha, retryCount + 1);
+        }
+      } catch (fetchError) {
+        console.error('Failed to fetch latest SHA for retry:', fetchError);
+      }
+      
+      // If fetch failed, retry without SHA
+      return saveDataToGitHub(octokit, config, customerId, data, message, null, retryCount + 1);
+    }
+    
+    // Only log as error if it's not a 409 or we've exhausted retries
+    if (error.status !== 409 || retryCount >= MAX_RETRIES) {
+      console.error('Failed to save data:', error);
+    }
+    
     return { 
       success: false, 
-      error: 'Failed to save data to GitHub' 
+      error: error.status === 409 
+        ? 'Save conflict - please refresh and try again' 
+        : 'Failed to save data to GitHub' 
     };
   }
 }
@@ -286,10 +326,13 @@ export async function loadDataFromGitHubAdmin(
       throw new Error('Invalid data format');
     }
   } catch (error: any) {
-    console.error('Failed to load data:', error);
+    // 404 is expected for new accounts, don't log it as an error
+    if (error.status !== 404) {
+      console.error('Failed to load data:', error);
+    }
     return { 
       success: false, 
-      error: 'Failed to load data. Check configuration.' 
+      error: error.status === 404 ? 'Account not found' : 'Failed to load data. Check configuration.' 
     };
   }
 }

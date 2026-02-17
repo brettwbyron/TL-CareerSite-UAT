@@ -83,10 +83,11 @@
   .login-box {
     background: var(--bg-2);
     padding: 3rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
     width: 100%;
     max-width: 400px;
+    border: 1px solid var(--bg-3);
   }
 
   .customer-id {
@@ -117,18 +118,19 @@
   .form-group input {
     width: 100%;
     padding: 0.75rem;
-    border: 2px solid var(--bg-3);
-    border-radius: 4px;
+    border: 1px solid var(--bg-3);
+    border-radius: var(--border-radius);
     font-size: 1rem;
     background: var(--bg-1);
     color: var(--fg-1);
-    transition: border-color 0.2s;
+    transition: all 0.2s;
     box-sizing: border-box;
   }
 
   .form-group input:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .form-group input:disabled {
@@ -138,28 +140,32 @@
 
   .error-message {
     margin-top: 0.5rem;
-    padding: 0.5rem;
-    background: #ffebee;
-    color: #c62828;
-    border-radius: 4px;
-    font-size: 0.9rem;
+    padding: 0.625rem 0.875rem;
+    background: #fef2f2;
+    color: #991b1b;
+    border-radius: var(--border-radius);
+    font-size: 0.875rem;
+    border: 1px solid var(--error);
   }
 
   .login-btn {
     width: 100%;
     padding: 0.875rem;
-    background: #4CAF50;
+    background: var(--primary);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
   }
 
   .login-btn:hover:not(:disabled) {
-    background: #45a049;
+    background: var(--primary-hover);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
   }
 
   .login-btn:disabled {
@@ -177,14 +183,15 @@
   .forgot-password-link {
     background: none;
     border: none;
-    color: #4CAF50;
+    color: var(--primary);
     text-decoration: underline;
     cursor: pointer;
     font-size: 0.9rem;
     padding: 0;
+    transition: color 0.2s;
   }
   
   .forgot-password-link:hover {
-    color: #45a049;
+    color: var(--primary-hover);
   }
 </style>

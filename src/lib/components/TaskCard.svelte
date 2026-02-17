@@ -82,47 +82,54 @@
           {/if}
         </div>
       {/if}
-      <div class="item-header">
-        <span class="item-type">{item.type}</span>
-        {#if isAdmin}
-          <button
-            class="lock-toggle"
-            onclick={handleLockToggle}
-            aria-label={item.locked ? 'Unlock task' : 'Lock task'}
-            title={item.locked ? 'Click to unlock task' : 'Click to lock task'}
-          >
-            {item.locked ? '🔒' : '🔓'}
-          </button>
-        {/if}
-      </div>
+      {#if item.type || isAdmin}
+         <div class="item-header">
+           {#if item.type}
+             <span class="item-type">{item.type}</span>
+           {:else}
+             <span class="item-type-none"></span>
+           {/if}
+           {#if isAdmin}
+             <button
+               class="lock-toggle"
+               onclick={handleLockToggle}
+               aria-label={item.locked ? 'Unlock task' : 'Lock task'}
+               title={item.locked ? 'Click to unlock task' : 'Click to lock task'}
+             >
+               {item.locked ? '🔒' : '🔓'}
+             </button>
+           {/if}
+         </div>
+      {/if}
   </div>
 </div>
 
 <style>
   .item {
-    background: var(--bg-3);
-    padding: 1rem;
-    border-radius: 4px;
+    background: white;
+    padding: 1.125rem;
+    border-radius: var(--border-radius);
     cursor: grab;
-    border: 2px solid transparent;
+    border: 1px solid var(--bg-3);
     transition: all 0.2s;
     position: relative;
     user-select: none;
+    box-shadow: var(--shadow-sm);
   }
   
   .item.read-only {
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.85;
   }
 
   .item:not(.read-only):hover {
-    border-color: #4CAF50;
+    border-color: var(--primary);
     transform: translateY(-2px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
   }
 
   .item:not(.read-only):focus {
-    outline: 2px solid #4CAF50;
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
   }
 
@@ -154,9 +161,9 @@
   }
 
   .lock-toggle:focus {
-    outline: 2px solid #4CAF50;
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
   }
 
   .item-header {
@@ -166,12 +173,12 @@
   }
 
   .item-type {
-    font-size: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 12px;
-    background: #e3f2fd;
-    color: #1976d2;
-    font-weight: 600;
+    font-size: 0.625rem;
+    padding: 0.375rem 0.875rem;
+    border-radius: 16px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -180,7 +187,7 @@
     margin: 0;
     color: var(--fg-1);
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.5;
     display: -webkit-box;
     line-clamp: 3;
     -webkit-line-clamp: 3;
@@ -199,13 +206,20 @@
   .item-image-thumb {
     width: 50px;
     height: 50px;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     overflow: hidden;
-    border: 1px solid var(--bg-2);
+    border: 1px solid var(--bg-3);
     padding: 0;
     background: none;
     cursor: pointer;
-    transition: transform 0.2s, border-color 0.2s;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .item-image-thumb:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+    box-shadow: var(--shadow-md);
   }
 
   .item-image-thumb img {
@@ -218,13 +232,25 @@
   .item-image-more {
     width: 50px;
     height: 50px;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     background: var(--bg-2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: var(--fg-2);
+    border: 1px solid var(--bg-3);
+  }
+
+  /* Dark mode adjustments */
+  :global(html.dark) .item {
+    background: rgba(39, 45, 69, 0.6);
+    border-color: rgba(76, 76, 76, 0.5);
+  }
+
+  :global(html.dark) .item:not(.read-only):hover {
+    background: rgba(39, 45, 69, 0.8);
+    border-color: var(--primary);
   }
 </style>

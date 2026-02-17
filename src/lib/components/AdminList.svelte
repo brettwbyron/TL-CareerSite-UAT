@@ -58,9 +58,7 @@
       createError = 'Input contains invalid characters. Only alphanumeric characters and spaces are allowed.';
       return
     } else {
-      console.log(`original customer id: ${newCustomerId}`)
       newCustomerId = newCustomerId.toLowerCase().replace(/[\s\-]+/g, '-');
-      console.log(`validated customer id: ${newCustomerId}`)
     }
 
     if (!newCustomerId.trim()) {
@@ -350,13 +348,13 @@
 
   .customer-button:hover {
     background: var(--bg-3);
-    border-color: #4CAF50;
+    border-color: var(--primary);
   }
 
   .customer-button:focus {
     outline: none;
-    border-color: #4CAF50;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
   
   .delete-btn {
@@ -401,7 +399,8 @@
 
   .form-group input:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .form-group input:disabled {
@@ -421,18 +420,21 @@
   form button {
     width: 100%;
     padding: 0.75rem;
-    background: #4CAF50;
+    background: var(--primary);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
   }
 
   form button:hover:not(:disabled) {
-    background: #45a049;
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
 
   form button:disabled {
@@ -451,8 +453,8 @@
     padding: 0.75rem;
     background: var(--bg-1);
     color: var(--fg-1);
-    border: 2px solid #4CAF50;
-    border-radius: 4px;
+    border: 2px solid var(--primary);
+    border-radius: var(--border-radius);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
@@ -460,8 +462,9 @@
   }
   
   .create-toggle-btn:hover {
-    background: #4CAF50;
+    background: var(--primary);
     color: white;
+    box-shadow: var(--shadow-md);
   }
   
   .create-form {
@@ -474,18 +477,21 @@
   .create-submit-btn {
     width: 100%;
     padding: 0.75rem;
-    background: #4CAF50;
+    background: var(--primary);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-sm);
   }
   
   .create-submit-btn:hover {
-    background: #45a049;
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
   }
   
   .modal-overlay {

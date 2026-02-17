@@ -1,0 +1,216 @@
+<script lang="ts">
+  import { trapFocus } from '$lib/utils';
+
+  let {
+    show = false,
+    onClose
+  }: {
+    show: boolean;
+    onClose: () => void;
+  } = $props();
+
+  function handleOverlayClick(e: MouseEvent) {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  }
+
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.code === 'Escape') {
+      e.preventDefault();
+      onClose();
+    }
+  }
+</script>
+
+{#if show}
+  <div 
+    class="modal-overlay"
+    role="dialog"
+    aria-modal="true"
+    tabindex="-1"
+    onclick={handleOverlayClick}
+    onkeydown={handleKeydown}
+  >
+    <div class="modal" {@attach trapFocus}>
+      <div class="modal-header">
+        <h2>Status Guide</h2>
+        <button class="close-btn" aria-label="Close help" onclick={onClose}>×</button>
+      </div>
+      <div class="modal-body">
+        <div class="status-section">
+          <h3>To Do</h3>
+          <p>By default, all UAT items should be set to "To Do"</p>
+          <p>You'll also need to set any items that has failed during re-test back to "To Do"</p>
+        </div>
+
+        <div class="status-section">
+          <h3>In Progress</h3>
+          <p>This means that we are working on the specific UAT item</p>
+        </div>
+
+        <div class="status-section">
+          <h3>Needs Feedback</h3>
+          <p>Requires your attention, please check under the "FEEDBACK" column as we will input any questions on there</p>
+          <p>Please change the status to "To Do" after you have provided your feedback</p>
+        </div>
+
+        <div class="status-section">
+          <h3>Re-Test</h3>
+          <p>Item has been updated and is ready to be tested again</p>
+        </div>
+
+        <div class="status-section">
+          <h3>Approved</h3>
+          <p>Item is confirmed to be fixed / resolved</p>
+        </div>
+
+        <div class="status-section">
+          <h3>Cancelled</h3>
+          <p>Item is cancelled</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="close-button" onclick={onClose}>Close</button>
+      </div>
+    </div>
+  </div>
+{/if}
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+  }
+
+  .modal {
+    background: var(--bg-1);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--bg-3);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--bg-3);
+  }
+
+  .modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--fg-1);
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--fg-2);
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover {
+    color: var(--fg-1);
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .status-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--bg-2);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary);
+  }
+
+  .status-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .status-section h3 {
+    margin: 0 0 0.75rem 0;
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .status-section p {
+    margin: 0.5rem 0;
+    color: var(--fg-1);
+    line-height: 1.5;
+  }
+
+  .status-section p:first-of-type {
+    margin-top: 0;
+  }
+
+  .status-section p:last-child {
+    margin-bottom: 0;
+  }
+
+  .modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--bg-3);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .close-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .close-button:hover {
+    background: var(--primary-dark);
+  }
+
+  @media (max-width: 768px) {
+    .modal {
+      max-width: 100%;
+      max-height: 90vh;
+    }
+
+    .modal-body {
+      padding: 1rem;
+    }
+
+    .status-section {
+      padding: 0.75rem;
+    }
+  }
+</style>

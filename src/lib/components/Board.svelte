@@ -2,6 +2,7 @@
   import type { Column, Task, TaskType, ColumnId } from '$lib/types';
   import SearchFilters from './SearchFilters.svelte';
   import ColumnComponent from './Column.svelte';
+  import ButtonComponent from './Button.svelte';
 
   let {
     displayName,
@@ -16,6 +17,7 @@
     dragOverColumn = $bindable<ColumnId | null>(null),
     disableAddTask = $bindable(false),
     onAddTask,
+    onHelp,
     onItemDragStart,
     onItemClick,
     onToggleLock,
@@ -37,6 +39,7 @@
     dragOverColumn: ColumnId | null;
     disableAddTask: boolean;
     onAddTask: () => void;
+    onHelp: () => void;
     onItemDragStart: (e: DragEvent, item: Task, columnId: ColumnId) => void;
     onItemClick: (item: Task, columnId: ColumnId) => void;
     onToggleLock: (itemId: number) => void;
@@ -69,7 +72,8 @@
     return diffDays;
   });
   
-  let isUatEndingSoon = $derived(daysRemaining !== null && daysRemaining <= 3 && daysRemaining >= 0);
+  let isUatExpired = $derived(daysRemaining !== null && daysRemaining <= 0);
+  let isUatEndingSoon = $derived(daysRemaining !== null && daysRemaining <= 3 && daysRemaining > 0);
 
   function getFilteredColumns(): Column[] {
     const filtered = columns.map(column => ({
@@ -181,36 +185,51 @@
         </div>
         
         <div class="form-actions">
-          <button class="save-btn" onclick={saveAccountInfo}>Save</button>
-          <button class="cancel-btn" onclick={cancelEditingAccountInfo}>Cancel</button>
+          <ButtonComponent 
+            element="button"
+            text="Save"
+            type="save"
+            onClick={saveAccountInfo}
+          />
+          <ButtonComponent 
+            element="button"
+            text="Cancel"
+            type="cancel"
+            onClick={cancelEditingAccountInfo}
+          />
         </div>
       </div>
     {:else}
       <div class="header-container">
         <h1>{displayName || customerId}</h1>
-        {#if isAdmin}
-          <button class="edit-account-btn" onclick={startEditingAccountInfo}>Edit Account Info</button>
-        {/if}
-      </div>
-      <div class="header-container">
         {#if uatEndDate}
-          <span class="uat-end-date" class:warning={isUatEndingSoon}>
-            UAT Review Deadline: {(() => {
-              const dateStr = uatEndDate.split('T')[0];
-              const [year, month, day] = dateStr.split('-').map(Number);
-              return new Date(year, month - 1, day).toLocaleDateString();
-            })()}
-            {#if daysRemaining !== null && daysRemaining >= 0}
-              ({daysRemaining} day{daysRemaining !== 1 ? 's' : ''} remaining)
+          <span class="uat-end-date" class:warning={isUatEndingSoon} class:error={isUatExpired}>
+            {#if isUatExpired}
+              UAT review is over. Fixing in progress.
+            {:else}
+              UAT Review Deadline: {(() => {
+                const dateStr = uatEndDate.split('T')[0];
+                const [year, month, day] = dateStr.split('-').map(Number);
+                return new Date(year, month - 1, day).toLocaleDateString();
+              })()}
+              {#if daysRemaining !== null && daysRemaining >= 0}
+                ({daysRemaining} day{daysRemaining !== 1 ? 's' : ''} remaining)
+              {/if}
             {/if}
           </span>
         {/if}
-        {#if devSiteUrl}
-          <a href={devSiteUrl.startsWith('http') ? devSiteUrl : `https://${devSiteUrl}`} target="_blank" rel="noopener noreferrer" class="dev-site-link">
-            View Dev Site
-          </a>
-        {/if}
       </div>
+      {#if isAdmin}
+        <div class="header-container">
+          <ButtonComponent 
+            element="button"
+            text="Edit Account Info"
+            type="primary"
+            size="small"
+            onClick={startEditingAccountInfo}
+          />
+        </div>
+      {/if}
     {/if}
     {#if isAdmin}
       <div class="admin-controls">
@@ -222,7 +241,7 @@
     {/if}
   </div>
 
-  <SearchFilters bind:searchQuery bind:filterType {onAddTask} {disableAddTask} />
+  <SearchFilters bind:searchQuery bind:filterType {onAddTask} {onHelp} {disableAddTask} />
 
   <div class="top-columns">
     {#if feedbackColumn && (isAdmin || feedbackColumn.items.length > 0)}
@@ -345,62 +364,41 @@
 
   .uat-end-date {
     color: var(--fg-2);
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
     background: var(--bg-2);
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     border: 1px solid var(--bg-3);
+    box-shadow: var(--shadow-sm);
   }
 
   .uat-end-date.warning {
-    background: #fff3e0;
-    color: #e65100;
-    border-color: #e65100;
+    background: #fef3c7;
+    color: #92400e;
+    border-color: var(--warning);
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
   }
 
-  .dev-site-link {
-    color: white;
-    background: #4CAF50;
-    font-size: 0.95rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: background 0.2s;
-    display: inline-block;
-  }
-
-  .dev-site-link:hover {
-    background: #45a049;
-  }
-
-  .edit-account-btn {
-    padding: 0.5rem 1rem;
-    background: var(--bg-2);
-    color: var(--fg-1);
-    border: 2px solid var(--bg-3);
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .edit-account-btn:hover {
-    background: var(--bg-3);
-    border-color: #4CAF50;
+  .uat-end-date.error {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    color: #991b1b;
+    border-color: var(--error);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
+    font-weight: 700;
   }
 
   .edit-account-form {
     background: var(--bg-2);
-    padding: 1.5rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--bg-3);
+    box-shadow: var(--shadow-md);
   }
 
   .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
   }
 
   .form-group label {
@@ -408,59 +406,33 @@
     margin-bottom: 0.5rem;
     color: var(--fg-1);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   .form-group input {
     width: 100%;
-    padding: 0.5rem;
-    border: 2px solid var(--bg-3);
-    border-radius: 4px;
+    padding: 0.75rem;
+    border: 1px solid var(--bg-3);
+    border-radius: var(--border-radius);
     font-size: 1rem;
     background: var(--bg-1);
     color: var(--fg-1);
-    transition: border-color 0.2s;
+    transition: all 0.2s;
     box-sizing: border-box;
   }
 
   .form-group input:focus {
     outline: none;
-    border-color: #4CAF50;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
   }
 
   .form-actions {
     display: flex;
     gap: 1rem;
     margin-top: 1.5rem;
-  }
-
-  .save-btn,
-  .cancel-btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .save-btn {
-    background: #4CAF50;
-    color: white;
-  }
-
-  .save-btn:hover {
-    background: #45a049;
-  }
-
-  .cancel-btn {
-    background: var(--bg-3);
-    color: var(--fg-1);
-  }
-
-  .cancel-btn:hover {
-    background: var(--bg-1);
   }
 
   .admin-controls {
@@ -536,6 +508,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
+  }
+
+  :global(html.dark) .uat-end-date.error {
+    background: linear-gradient(135deg, rgba(255, 235, 238, 0.15) 0%, rgba(255, 205, 210, 0.15) 100%);
+    border-color: rgba(244, 67, 54, 0.6);
+    color: #ffcdd2;
   }
 
   @media (max-width: 768px) {

@@ -3,21 +3,24 @@
   import { Octokit } from 'octokit';
   import { hashPassword, listAllDataFromGitHub, loadDataFromGitHub, loadDataFromGitHubAdmin, saveDataToGitHub, deleteDataFromGitHub, getDefaultColumns, STORAGE_VERSION } from '$lib/utils';
   import type { GitHubConfig } from '$lib/utils';
+  import logo from '$lib/assets/employ_logo.svg';
   
   // Components
   import ToastComponent from '$lib/components/Toast.svelte';
+  import ButtonComponent from '$lib/components/Button.svelte';
   import Login from '$lib/components/Login.svelte';
   import AdminList from '$lib/components/AdminList.svelte';
   import Board from '$lib/components/Board.svelte';
   import TaskModal from '$lib/components/TaskModal.svelte';
   import ConfirmModal from '$lib/components/ConfirmModal.svelte';
+  import HelpModal from '$lib/components/HelpModal.svelte';
 
   // GitHub Configuration from environment variables
   const GITHUB_OWNER = import.meta.env.VITE_GITHUB_OWNER || 'your-github-username';
   const GITHUB_REPO = import.meta.env.VITE_GITHUB_REPO || 'uat-app';
   const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN || 'your-github-token';
   const GITHUB_BRANCH = import.meta.env.VITE_GITHUB_BRANCH || 'data';
-  const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
+  const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD || 'password-for-admin-login';
 
   // Initialize Octokit
   const octokit = new Octokit({ auth: GITHUB_TOKEN });
@@ -37,6 +40,7 @@
   let passwordError = $state('');
   let isLoading = $state(false);
   let isSaving = $state(false);
+  let hasPendingSave = $state(false);
   let fileSha = $state<string | null>(null);
   let storedPasswordHash = $state<string>(''); // Store original password hash
   let displayName = $state<string>('');
@@ -194,7 +198,6 @@
   let isModalViewOnly = $state(false);
   let modalData = $state<ModalData>({
     description: '',
-    type: 'Change Request',
     device: 'All',
     feedback: '',
     section: '',
@@ -212,6 +215,7 @@
   // Confirmation modals
   let showDeleteConfirm = $state(false);
   let showUnsavedChanges = $state(false);
+  let showHelpModal = $state(false);
 
   // Validation
   let validationError = $state('');
@@ -305,7 +309,7 @@
       // Reload customer list
       await loadAdminCustomers();
     } else {
-      showToast('Failed to create customer', 'error');
+      showToast(result.error || 'Failed to create customer', 'error');
     }
     
     isLoading = false;
@@ -388,9 +392,16 @@
 
   // Simple save function called after user actions
   async function handleSave() {
-    if (!isAuthenticated || !columns || columns.length === 0 || isSaving) return;
+    if (!isAuthenticated || !columns || columns.length === 0) return;
+    
+    // If already saving, mark that we need another save after this one
+    if (isSaving) {
+      hasPendingSave = true;
+      return;
+    }
     
     isSaving = true;
+    hasPendingSave = false;
     
     try {
       const boardData: BoardData = {
@@ -412,10 +423,16 @@
         }
         showToast('Changes saved', 'success');
       } else {
-        showToast('Failed to save changes', 'error');
+        showToast(result.error || 'Failed to save changes', 'error');
       }
     } finally {
       isSaving = false;
+      
+      // If another save was requested while we were saving, process it now
+      if (hasPendingSave) {
+        // Small delay to avoid immediate retry
+        setTimeout(() => handleSave(), 100);
+      }
     }
   }
 
@@ -493,7 +510,6 @@
     isModalViewOnly = false;
     modalData = {
       description: '',
-      type: 'Change Request',
       device: 'All',
       feedback: '',
       section: '',
@@ -636,14 +652,43 @@
     showDeleteConfirm = true;
   }
 
-  function executeDelete() {
+  async function executeDelete() {
     if (selectedItem && originalColumnId) {
       const column = columns.find(c => c.id === originalColumnId);
       if (column) {
         column.items = column.items.filter(item => item.id !== selectedItem!.id);
         columns = [...columns];
         showToast('Task deleted', 'info');
-        handleSave();
+        
+        // Save with skipMerge to prevent deleted task from being restored
+        if (!isSaving) {
+          isSaving = true;
+          try {
+            const boardData: BoardData = {
+              displayName,
+              uatEndDate,
+              devSiteUrl,
+              passwordHash: storedPasswordHash,
+              version: STORAGE_VERSION,
+              columns,
+              disableAddTask
+            };
+            
+            const id = customerId || usernameInput.toLowerCase();
+            const result = await saveDataToGitHub(octokit, githubConfig, id, boardData, 'Delete task', fileSha);
+            
+            if (result.success) {
+              if (result.sha) {
+                fileSha = result.sha;
+              }
+              showToast('Changes saved', 'success');
+            } else {
+              showToast(result.error || 'Failed to save changes', 'error');
+            }
+          } finally {
+            isSaving = false;
+          }
+        }
       }
     }
     showDeleteConfirm = false;
@@ -653,9 +698,34 @@
   function cancelDelete() {
     showDeleteConfirm = false;
   }
+
+  function openHelpModal() {
+    showHelpModal = true;
+  }
+
+  function closeHelpModal() {
+    showHelpModal = false;
+  }
 </script>
 
-<ToastComponent bind:toasts />
+<nav class="navbar">
+  <div class="nav-left">
+    <div class="employ-logo">
+      <img src={logo} alt="Talemetry" width="150" />
+    </div>
+  </div>
+  <div class="nav-right">
+    {#if isAuthenticated && devSiteUrl}
+      <ButtonComponent
+        text="Open Dev Site"
+        href={devSiteUrl.startsWith('http') ? devSiteUrl : `https://${devSiteUrl}`}
+        type="hollow"
+        target="_blank"
+        rel="nofollow noopener"
+      />
+    {/if}
+  </div>
+</nav>
 
 {#if isAdminMode}
   <AdminList
@@ -693,6 +763,7 @@
     bind:dragOverColumn
     bind:disableAddTask
     onAddTask={openNewItemModal}
+    onHelp={openHelpModal}
     onItemDragStart={handleDragStart}
     onItemClick={openModal}
     onToggleLock={toggleTaskLock}
@@ -732,4 +803,46 @@
     onDiscard={discardChanges}
     onSave={saveAndClose}
   />
+
+  <HelpModal
+    show={showHelpModal}
+    onClose={closeHelpModal}
+  />
 {/if}
+
+<ToastComponent bind:toasts />
+
+<style>
+  .navbar {
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2.5rem;
+    min-height: 100px;
+    background: var(--navbar-bg);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 0 1 auto;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    flex: 1;
+  }
+
+  .employ-logo {
+    width: 150px;
+    height: auto;
+    margin-top: 0.3333rem;
+  }
+</style>

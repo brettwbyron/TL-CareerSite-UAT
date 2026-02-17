@@ -1,4 +1,4 @@
-export const TASK_TYPES = ['Change Request', 'Issue', 'Feature', 'Bug'] as const;
+export const TASK_TYPES = ['Change Request', 'Issue', 'Feature'] as const;
 export const DEVICE_TYPES = ['All', 'Desktop', 'Mobile'] as const;
 
 export type DeviceType = typeof DEVICE_TYPES[number];
@@ -9,7 +9,7 @@ export type ColumnId = 'todo' | 'inprogress' | 'retest' | 'feedback' | 'done' | 
 export interface Task {
 	id: number;
 	description: string;
-	type: TaskType;
+	type?: TaskType;
 	device: DeviceType;
 	feedback: string;
 	section: string;
@@ -37,7 +37,7 @@ export interface BoardData {
 
 export interface ModalData {
 	description: string;
-	type: TaskType;
+	type?: TaskType;
 	device: DeviceType;
 	feedback: string;
 	section: string;

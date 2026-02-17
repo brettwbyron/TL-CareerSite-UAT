@@ -29,25 +29,24 @@
 
   .toast {
     padding: 1rem 1.5rem;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
     font-weight: 500;
-    width: fit-content;
-    max-width: 400px;
+    width: 400px;
   }
 
   .toast-success {
-    background: #4CAF50;
+    background: var(--success);
     color: white;
   }
 
   .toast-error {
-    background: #f44336;
+    background: var(--error);
     color: white;
   }
 
   .toast-info {
-    background: #2196F3;
+    background: var(--primary);
     color: white;
   }
 </style>

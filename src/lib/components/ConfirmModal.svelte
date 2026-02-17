@@ -1,6 +1,8 @@
 <script lang="ts">
   import { trapFocus } from '$lib/utils';
 
+  import ButtonComponent from '$lib/components/Button.svelte';
+
   let {
     show = false,
     type = 'delete', // 'delete' | 'unsaved'
@@ -53,12 +55,37 @@
       </div>
       <div class="modal-footer">
         {#if type === 'delete'}
-          <button class="cancel-btn" onclick={onCancel}>Cancel</button>
-          <button class="delete-confirm-btn" onclick={onConfirm}>Delete</button>
+          <ButtonComponent 
+            element="button"
+            text="Cancel"
+            type="cancel"
+            onClick={onCancel}
+          />
+          <ButtonComponent 
+            element="button"
+            text="Delete"
+            type="delete"
+            onClick={onConfirm}
+          />
         {:else}
-          <button class="cancel-btn" onclick={onCancel}>Keep Editing</button>
-          <button class="delete-confirm-btn" onclick={onDiscard}>Discard</button>
-          <button class="save-btn" onclick={onSave}>Save</button>
+          <ButtonComponent 
+            element="button"
+            text="Keep Editing"
+            type="cancel"
+            onClick={onCancel}
+          />
+          <ButtonComponent 
+            element="button"
+            text="Discard"
+            type="delete"
+            onClick={onDiscard}
+          />
+          <ButtonComponent 
+            element="button"
+            text="Save"
+            type="save"
+            onClick={onSave}
+          />
         {/if}
       </div>
     </div>
@@ -126,43 +153,6 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
-  }
-
-  .modal-footer button {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background 0.2s;
-  }
-
-  .cancel-btn {
-    background: var(--bg-3);
-    color: var(--fg-1);
-  }
-
-  .cancel-btn:hover {
-    background: var(--bg-1);
-  }
-
-  .save-btn {
-    background: #4CAF50;
-    color: white;
-  }
-
-  .save-btn:hover {
-    background: #45a049;
-  }
-
-  .delete-confirm-btn {
-    background: #f44336;
-    color: white;
-  }
-
-  .delete-confirm-btn:hover {
-    background: #d32f2f;
   }
 
   @media (max-width: 768px) {
