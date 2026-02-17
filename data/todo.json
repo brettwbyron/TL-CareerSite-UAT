@@ -10,18 +10,6 @@
       "title": "To Do",
       "items": [
         {
-          "id": 1770830750701,
-          "description": "Multiple UAT instances for single accounts. If a customer has multi-lingual, internal/external, subsidiaries, etc., it could be nice to not have to create a new account each time and have all UATs in one account.",
-          "type": "Feature",
-          "feedback": "",
-          "section": "App",
-          "createdAt": "2026-02-11T17:25:50.701Z",
-          "updatedAt": "2026-02-11T17:25:50.701Z",
-          "locked": false,
-          "images": [],
-          "device": "All"
-        },
-        {
           "id": 1770930661810,
           "description": "Need to add timestamp for when comments are made.",
           "type": "Change Request",
