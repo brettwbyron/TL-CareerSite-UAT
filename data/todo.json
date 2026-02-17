@@ -81,18 +81,6 @@
           "device": "All"
         },
         {
-          "id": 1770830564907,
-          "description": "When not in admin mode, some of these columns should be hidden when empty. Specifically, the \"Feedback\", \"In progress\" and \"Re-test\" columns should be hidden when empty.",
-          "type": "Change Request",
-          "feedback": "",
-          "section": "Board",
-          "createdAt": "2026-02-11T17:22:44.907Z",
-          "updatedAt": "2026-02-11T17:22:44.907Z",
-          "locked": true,
-          "images": [],
-          "device": "All"
-        },
-        {
           "id": 1770925702634,
           "description": "Add customer name, UAT deadline and dev link info.",
           "type": "Feature",
@@ -127,18 +115,6 @@
           "updatedAt": "2026-02-12T21:30:47.404Z",
           "locked": true,
           "images": []
-        },
-        {
-          "id": 1770830564907,
-          "description": "When not in admin mode, some of these columns should be hidden when empty. Specifically, the \"Feedback\", \"In progress\" and \"Re-test\" columns should be hidden when empty.",
-          "type": "Change Request",
-          "feedback": "",
-          "section": "Board",
-          "createdAt": "2026-02-11T17:22:44.907Z",
-          "updatedAt": "2026-02-11T17:22:44.907Z",
-          "locked": true,
-          "images": [],
-          "device": "All"
         }
       ]
     },
@@ -193,6 +169,18 @@
           "updatedAt": "2026-02-12T21:05:52.848Z",
           "locked": true,
           "images": []
+        },
+        {
+          "id": 1770830564907,
+          "description": "When not in admin mode, some of these columns should be hidden when empty. Specifically, the \"Feedback\", \"In progress\" and \"Re-test\" columns should be hidden when empty.",
+          "type": "Change Request",
+          "feedback": "",
+          "section": "Board",
+          "createdAt": "2026-02-11T17:22:44.907Z",
+          "updatedAt": "2026-02-11T17:22:44.907Z",
+          "locked": true,
+          "images": [],
+          "device": "All"
         }
       ]
     },
