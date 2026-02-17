@@ -18,7 +18,8 @@
           "createdAt": "2026-02-17T15:59:06.396Z",
           "updatedAt": "2026-02-17T15:59:06.396Z",
           "locked": false,
-          "images": []
+          "images": [],
+          "type": "Change Request"
         },
         {
           "id": 1771343950927,
