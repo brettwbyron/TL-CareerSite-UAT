@@ -46,18 +46,6 @@
           "images": []
         },
         {
-          "id": 1770931780040,
-          "description": "Don't default all task types to \"Change Request\" on creation",
-          "type": "Bug",
-          "device": "All",
-          "feedback": "",
-          "section": "TaskModal",
-          "createdAt": "2026-02-12T21:29:40.039Z",
-          "updatedAt": "2026-02-12T21:29:40.039Z",
-          "locked": false,
-          "images": []
-        },
-        {
           "id": 1770931976846,
           "description": "Set up data in its own private repo for more security",
           "type": "Feature",
@@ -138,6 +126,18 @@
           "section": "",
           "createdAt": "2026-02-12T21:30:47.404Z",
           "updatedAt": "2026-02-12T21:30:47.404Z",
+          "locked": true,
+          "images": []
+        },
+        {
+          "id": 1770931780040,
+          "description": "Don't default all task types to \"Change Request\" on creation",
+          "type": "Bug",
+          "device": "All",
+          "feedback": "",
+          "section": "TaskModal",
+          "createdAt": "2026-02-12T21:29:40.039Z",
+          "updatedAt": "2026-02-12T21:29:40.039Z",
           "locked": true,
           "images": []
         }
