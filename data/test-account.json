@@ -49,6 +49,11 @@
     {
       "id": "feedback",
       "title": "Feedback Needed",
+      "items": []
+    },
+    {
+      "id": "done",
+      "title": "Done",
       "items": [
         {
           "id": 1771343071665,
@@ -63,11 +68,6 @@
           "images": []
         }
       ]
-    },
-    {
-      "id": "done",
-      "title": "Done",
-      "items": []
     },
     {
       "id": "cancelled",
