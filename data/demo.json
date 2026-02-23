@@ -20,6 +20,18 @@
           "updatedAt": "2026-02-17T16:52:01.594Z",
           "locked": true,
           "images": []
+        },
+        {
+          "id": 1770326352344,
+          "description": "A description of a change request or issue...",
+          "type": "Change Request",
+          "feedback": "",
+          "section": "All pages",
+          "createdAt": "2026-02-05T21:19:12.344Z",
+          "updatedAt": "2026-02-05T21:19:12.344Z",
+          "locked": true,
+          "images": [],
+          "device": "All"
         }
       ]
     },
@@ -55,18 +67,6 @@
       "title": "Done",
       "items": [
         {
-          "id": 1770326352344,
-          "description": "A description of a change request or issue...",
-          "type": "Change Request",
-          "feedback": "",
-          "section": "All pages",
-          "createdAt": "2026-02-05T21:19:12.344Z",
-          "updatedAt": "2026-02-05T21:19:12.344Z",
-          "locked": true,
-          "images": [],
-          "device": "All"
-        },
-        {
           "id": 1770408343395,
           "description": "A task with image attachments.",
           "type": "Change Request",
@@ -88,5 +88,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T16:00:44.242Z"
+  "lastModified": "2026-02-23T16:00:45.149Z"
 }
