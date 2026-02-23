@@ -4,7 +4,7 @@
   "devSiteUrl": "democareers-dev.ttcportals.com",
   "uatFolderUrl": "https://employinc.sharepoint.com/sites/ImplementationsServicesSharepoint/Shared%20Documents/Customers/W/Wallick%20Properties/Implementation/Templated%20Career%20Site/External%20Site/Wallick%20Images?csf=1&web=1&e=pKdLds",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 4,
+  "version": 5,
   "columns": [
     {
       "id": "todo",
@@ -53,6 +53,11 @@
               "text": "test",
               "author": "customer",
               "createdAt": "2026-02-23T19:18:28.390Z"
+            },
+            {
+              "text": "admin test",
+              "author": "admin",
+              "createdAt": "2026-02-23T19:22:35.422Z"
             }
           ],
           "section": "",
