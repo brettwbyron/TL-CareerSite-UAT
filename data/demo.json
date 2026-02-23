@@ -73,9 +73,9 @@
           "updatedAt": "2026-02-06T20:00:59.091Z",
           "locked": true,
           "images": [],
-          "owner": "",
+          "owner": "CWS Dev",
           "device": "All",
-          "priority": ""
+          "priority": "High"
         }
       ]
     },
@@ -96,5 +96,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:20:07.786Z"
+  "lastModified": "2026-02-23T18:22:10.309Z"
 }
