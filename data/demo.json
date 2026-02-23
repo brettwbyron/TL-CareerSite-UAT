@@ -4,7 +4,7 @@
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "sharepoint.com/path/to/customer_uat",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 4,
+  "version": 5,
   "columns": [
     {
       "id": "todo",
@@ -29,7 +29,7 @@
           "type": "Issue",
           "device": "All",
           "feedback": [],
-          "section": "",
+          "section": "All pages",
           "owner": "CWS Dev",
           "createdAt": "2026-02-23T19:48:43.868Z",
           "updatedAt": "2026-02-23T19:48:43.868Z",
