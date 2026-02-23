@@ -4,7 +4,7 @@
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "sharepoint.com/path/to/customer_uat",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 20,
+  "version": 21,
   "columns": [
     {
       "id": "todo",
@@ -59,7 +59,7 @@
               "text": "More customer feedback.\n\nNow this is edited. It was created at: Feb 23, 2026, 3:23 PM",
               "author": "customer",
               "createdAt": "2026-02-23T20:23:06.451Z",
-              "editedAt": "2026-02-23T20:24:16.009Z"
+              "editedAt": "2026-02-23T20:47:51.964Z"
             },
             {
               "text": "I'm submitting as the PM now, and I can see that the last customer feedback was edited.",
