@@ -17,7 +17,7 @@
           "section": "All pages",
           "createdAt": "2026-02-05T21:19:12.344Z",
           "updatedAt": "2026-02-05T21:19:12.344Z",
-          "locked": true,
+          "locked": false,
           "images": [],
           "device": "All"
         },
@@ -88,5 +88,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T16:51:02.051Z"
+  "lastModified": "2026-02-23T16:54:25.067Z"
 }
