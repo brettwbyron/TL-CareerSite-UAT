@@ -4,7 +4,7 @@
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "sharepoint.com/path/to/customer_uat",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 9,
+  "version": 10,
   "columns": [
     {
       "id": "todo",
@@ -44,8 +44,14 @@
           "description": "Task with feedback conversation",
           "type": "Change Request",
           "device": "All",
-          "feedback": [],
-          "section": "",
+          "feedback": [
+            {
+              "text": "Customer feedback",
+              "author": "customer",
+              "createdAt": "2026-02-23T20:08:37.572Z"
+            }
+          ],
+          "section": "Home Page",
           "owner": "CWS Dev",
           "createdAt": "2026-02-23T20:08:02.041Z",
           "updatedAt": "2026-02-23T20:08:02.041Z",
