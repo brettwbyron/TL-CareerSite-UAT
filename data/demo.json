@@ -4,7 +4,7 @@
   "devSiteUrl": "democareers-dev.ttcportals.com",
   "uatFolderUrl": "https://employinc.sharepoint.com/sites/ImplementationsServicesSharepoint/Shared%20Documents/Customers/W/Wallick%20Properties/Implementation/Templated%20Career%20Site/External%20Site/Wallick%20Images?csf=1&web=1&e=pKdLds",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 6,
+  "version": 7,
   "columns": [
     {
       "id": "todo",
@@ -66,6 +66,17 @@
           "locked": false,
           "images": [],
           "owner": "CWS Dev"
+        },
+        {
+          "id": 1771875074489,
+          "description": "New task for testing",
+          "device": "All",
+          "feedback": [],
+          "section": "",
+          "createdAt": "2026-02-23T19:31:14.489Z",
+          "updatedAt": "2026-02-23T19:31:14.489Z",
+          "locked": false,
+          "images": []
         }
       ]
     },
