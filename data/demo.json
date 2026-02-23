@@ -4,8 +4,7 @@
   "devSiteUrl": "democareers-dev.ttcportals.com",
   "uatFolderUrl": "https://employinc.sharepoint.com/sites/ImplementationsServicesSharepoint/Shared%20Documents/Customers/W/Wallick%20Properties/Implementation/Templated%20Career%20Site/External%20Site/Wallick%20Images?csf=1&web=1&e=pKdLds",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 1,
-  "disableAddTask": false,
+  "version": 2,
   "columns": [
     {
       "id": "todo",
@@ -21,7 +20,8 @@
           "updatedAt": "2026-02-05T21:19:12.344Z",
           "locked": false,
           "images": [],
-          "device": "All"
+          "device": "All",
+          "owner": ""
         },
         {
           "id": 1770408343395,
@@ -92,5 +92,6 @@
       "title": "Cancelled",
       "items": []
     }
-  ]
+  ],
+  "disableAddTask": false
 }
