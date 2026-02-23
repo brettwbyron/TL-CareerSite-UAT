@@ -48,7 +48,7 @@
           "section": "",
           "createdAt": "2026-02-17T16:52:01.594Z",
           "updatedAt": "2026-02-17T16:52:01.594Z",
-          "locked": true,
+          "locked": false,
           "images": [],
           "owner": "CWS Dev",
           "priority": "Low"
@@ -97,5 +97,5 @@
     }
   ],
   "disableAddTask": false,
-  "dataVersion": 1
+  "dataVersion": 2
 }
