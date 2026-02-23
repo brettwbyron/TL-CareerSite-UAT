@@ -36,7 +36,7 @@
           "locked": false,
           "device": "All",
           "owner": "Customer",
-          "priority": ""
+          "priority": "Medium"
         },
         {
           "id": 1771347121594,
@@ -96,5 +96,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:11:56.030Z"
+  "lastModified": "2026-02-23T18:13:04.764Z"
 }
