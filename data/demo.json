@@ -4,7 +4,7 @@
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "sharepoint.com/path/to/customer_uat",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 14,
+  "version": 15,
   "columns": [
     {
       "id": "todo",
@@ -56,7 +56,7 @@
               "createdAt": "2026-02-23T20:12:30.107Z"
             },
             {
-              "text": "More customer feedback. \n\nThis is now edited and was created at: Feb 23, 2026, 3:13 PM",
+              "text": "More customer feedback. \n\nThis is now edited and was created at: Feb 23, 2026, 3:13 PM.",
               "author": "customer",
               "createdAt": "2026-02-23T20:13:08.272Z"
             }
