@@ -928,7 +928,8 @@
 
   function getNotifyTeamMailto(): string {
     const subject = encodeURIComponent(`UAT Alert! - ${displayName} needs attention`);
-    const uatUrl = window.location.href;
+    const baseUrl = `${window.location.origin}${window.location.pathname}`;
+    const uatUrl = `${baseUrl}#${customerId}`;
     const body = encodeURIComponent(`The UAT page for ${displayName} has sent an alert to the team.\n\nPlease check the UAT page as soon as possible:\n${uatUrl}\n\n`);
     return `mailto:${contactEmails}?subject=${subject}&body=${body}`;
   }
