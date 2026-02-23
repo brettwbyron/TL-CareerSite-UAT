@@ -4,12 +4,26 @@
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "sharepoint.com/path/to/customer_uat",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 1,
+  "version": 2,
   "columns": [
     {
       "id": "todo",
       "title": "To Do",
-      "items": []
+      "items": [
+        {
+          "id": 1771876095081,
+          "description": "New task",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": [],
+          "section": "",
+          "owner": "CWS Dev",
+          "createdAt": "2026-02-23T19:48:15.081Z",
+          "updatedAt": "2026-02-23T19:48:15.081Z",
+          "locked": false,
+          "images": []
+        }
+      ]
     },
     {
       "id": "inprogress",
