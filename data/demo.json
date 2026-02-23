@@ -44,7 +44,7 @@
           "section": "",
           "createdAt": "2026-02-17T16:52:01.594Z",
           "updatedAt": "2026-02-17T16:52:01.594Z",
-          "locked": true,
+          "locked": false,
           "images": []
         }
       ]
@@ -88,5 +88,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T16:57:36.173Z"
+  "lastModified": "2026-02-23T16:59:30.116Z"
 }
