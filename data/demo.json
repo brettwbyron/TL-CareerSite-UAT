@@ -3,8 +3,9 @@
   "uatEndDate": "2026-03-30",
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "sharepoint.com/path/to/customer_uat",
+  "contactEmails": "brett.byron@employinc.com, test@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 22,
+  "version": 23,
   "columns": [
     {
       "id": "todo",
