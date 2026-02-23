@@ -50,7 +50,7 @@
           "locked": false,
           "images": [],
           "owner": "CWS Dev",
-          "priority": ""
+          "priority": "Low"
         }
       ]
     },
@@ -96,5 +96,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:13:04.764Z"
+  "lastModified": "2026-02-23T18:20:07.786Z"
 }
