@@ -38,20 +38,6 @@
           "device": "All",
           "owner": "Customer",
           "priority": "Medium"
-        },
-        {
-          "id": 1771347121594,
-          "description": "New task",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "test",
-          "section": "",
-          "createdAt": "2026-02-17T16:52:01.594Z",
-          "updatedAt": "2026-02-17T16:52:01.594Z",
-          "locked": false,
-          "images": [],
-          "owner": "CWS Dev",
-          "priority": "Low"
         }
       ]
     },
@@ -88,7 +74,22 @@
     {
       "id": "done",
       "title": "Done",
-      "items": []
+      "items": [
+        {
+          "id": 1771347121594,
+          "description": "New task",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "test",
+          "section": "",
+          "createdAt": "2026-02-17T16:52:01.594Z",
+          "updatedAt": "2026-02-17T16:52:01.594Z",
+          "locked": true,
+          "images": [],
+          "owner": "CWS Dev",
+          "priority": "Low"
+        }
+      ]
     },
     {
       "id": "cancelled",
@@ -97,5 +98,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:50:44.500Z"
+  "lastModified": "2026-02-23T18:50:59.586Z"
 }
