@@ -19,7 +19,8 @@
           "updatedAt": "2026-02-05T21:19:12.344Z",
           "locked": false,
           "images": [],
-          "device": "All"
+          "device": "All",
+          "priority": ""
         },
         {
           "id": 1770408343395,
@@ -94,5 +95,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:09:57.317Z"
+  "lastModified": "2026-02-23T18:10:17.014Z"
 }
