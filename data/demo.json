@@ -4,7 +4,8 @@
   "devSiteUrl": "democareers-dev.ttcportals.com",
   "uatFolderUrl": "https://employinc.sharepoint.com/sites/ImplementationsServicesSharepoint/Shared%20Documents/Customers/W/Wallick%20Properties/Implementation/Templated%20Career%20Site/External%20Site/Wallick%20Images?csf=1&web=1&e=pKdLds",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": "1.0",
+  "version": 1,
+  "disableAddTask": false,
   "columns": [
     {
       "id": "todo",
@@ -20,8 +21,7 @@
           "updatedAt": "2026-02-05T21:19:12.344Z",
           "locked": false,
           "images": [],
-          "device": "All",
-          "priority": ""
+          "device": "All"
         },
         {
           "id": 1770408343395,
@@ -36,8 +36,7 @@
           ],
           "locked": false,
           "device": "All",
-          "owner": "Customer",
-          "priority": "Medium"
+          "owner": "Customer"
         },
         {
           "id": 1771347121594,
@@ -50,8 +49,7 @@
           "updatedAt": "2026-02-17T16:52:01.594Z",
           "locked": false,
           "images": [],
-          "owner": "CWS Dev",
-          "priority": "Low"
+          "owner": "CWS Dev"
         }
       ]
     },
@@ -75,8 +73,7 @@
           "locked": true,
           "images": [],
           "owner": "CWS Dev",
-          "device": "All",
-          "priority": "High"
+          "device": "All"
         }
       ]
     },
@@ -95,7 +92,5 @@
       "title": "Cancelled",
       "items": []
     }
-  ],
-  "disableAddTask": false,
-  "dataVersion": 2
+  ]
 }
