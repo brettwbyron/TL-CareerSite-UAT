@@ -55,7 +55,9 @@
           "createdAt": "2026-02-06T20:00:59.091Z",
           "updatedAt": "2026-02-06T20:00:59.091Z",
           "locked": true,
-          "images": []
+          "images": [],
+          "owner": "",
+          "device": "All"
         }
       ]
     },
@@ -90,5 +92,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T17:37:40.716Z"
+  "lastModified": "2026-02-23T17:40:02.473Z"
 }
