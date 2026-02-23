@@ -37,6 +37,20 @@
           "device": "All",
           "owner": "Customer",
           "priority": ""
+        },
+        {
+          "id": 1771347121594,
+          "description": "New task",
+          "type": "Change Request",
+          "device": "All",
+          "feedback": "test",
+          "section": "",
+          "createdAt": "2026-02-17T16:52:01.594Z",
+          "updatedAt": "2026-02-17T16:52:01.594Z",
+          "locked": true,
+          "images": [],
+          "owner": "CWS Dev",
+          "priority": ""
         }
       ]
     },
@@ -68,22 +82,7 @@
     {
       "id": "feedback",
       "title": "Feedback Needed",
-      "items": [
-        {
-          "id": 1771347121594,
-          "description": "New task",
-          "type": "Change Request",
-          "device": "All",
-          "feedback": "test",
-          "section": "",
-          "createdAt": "2026-02-17T16:52:01.594Z",
-          "updatedAt": "2026-02-17T16:52:01.594Z",
-          "locked": true,
-          "images": [],
-          "owner": "CWS Dev",
-          "priority": ""
-        }
-      ]
+      "items": []
     },
     {
       "id": "done",
@@ -97,5 +96,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:10:25.486Z"
+  "lastModified": "2026-02-23T18:11:54.679Z"
 }
