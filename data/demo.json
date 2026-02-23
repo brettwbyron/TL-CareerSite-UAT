@@ -60,7 +60,8 @@
           "locked": true,
           "images": [],
           "owner": "",
-          "device": "All"
+          "device": "All",
+          "priority": ""
         }
       ]
     },
@@ -96,5 +97,5 @@
     }
   ],
   "disableAddTask": false,
-  "lastModified": "2026-02-23T18:10:21.240Z"
+  "lastModified": "2026-02-23T18:10:25.486Z"
 }
