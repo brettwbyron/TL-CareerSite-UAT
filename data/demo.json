@@ -3,7 +3,7 @@
   "uatEndDate": "2026-03-30",
   "devSiteUrl": "web.site.com",
   "uatFolderUrl": "",
-  "contactEmails": "brett.byron@employinc.com, kevin.meyer@employinc.com",
+  "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
   "version": 32,
   "columns": [
@@ -47,29 +47,29 @@
           "device": "All",
           "feedback": [
             {
-              "text": "Customer feedback",
-              "author": "customer",
+              "text": "User feedback",
+              "author": "account",
               "createdAt": "2026-02-23T20:08:37.572Z"
             },
             {
               "text": "Admin feedback from CWS Dev",
-              "author": "cws-dev",
+              "author": "developer",
               "createdAt": "2026-02-23T20:12:30.107Z"
             },
             {
-              "text": "More customer feedback.\n\nNow this is edited. It was created at: Feb 23, 2026, 3:23 PM",
-              "author": "customer",
+              "text": "More account feedback.\n\nNow this is edited. It was created at: Feb 23, 2026, 3:23 PM",
+              "author": "account",
               "createdAt": "2026-02-23T20:23:06.451Z",
               "editedAt": "2026-02-23T20:47:51.964Z"
             },
             {
-              "text": "I'm submitting as the PM now, and I can see that the last customer feedback was edited.",
+              "text": "I'm submitting as the PM now, and I can see that the last account feedback was edited.",
               "author": "pm",
               "createdAt": "2026-02-23T20:25:11.830Z"
             },
             {
               "text": "Why did the chicken cross the road?\n\nTo prove to the armadillo it could actually be done.",
-              "author": "customer",
+              "author": "account",
               "createdAt": "2026-02-23T22:06:10.079Z"
             }
           ],
