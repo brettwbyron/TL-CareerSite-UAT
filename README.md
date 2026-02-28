@@ -1,4 +1,12 @@
-# GitHub UAT Board Setup Instructions
+# How to use this demo (read-only)
+
+## Sign in
+
+Head to the admin page (https://brettwbyron.github.io/ReviewAT/admin) and use the password `admin` to log in as an admin. I have permissions for this demo site set to "read only", so you will see errors if you try to make an account or save any changes to the demo account.
+
+You can view the demo account by going to the demo account page (https://brettwbyron.github.io/ReviewAT/demo) and use the password `guest` to log in as a user.
+
+## GitHub UAT Board Setup Instructions
 
 This guide walks you through configuring the UAT board to use GitHub for data storage with password protection.
 
