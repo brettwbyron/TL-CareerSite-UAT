@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 54,
+  "version": 55,
   "columns": [
     {
       "id": "todo",
@@ -85,7 +85,18 @@
           "updatedAt": "2026-02-23T20:08:02.041Z",
           "locked": false,
           "images": []
-        },
+        }
+      ]
+    },
+    {
+      "id": "inprogress",
+      "title": "In Progress",
+      "items": []
+    },
+    {
+      "id": "retest",
+      "title": "Re-Test",
+      "items": [
         {
           "id": 1772302948952,
           "description": "A task with a lot of feedback",
@@ -153,20 +164,10 @@
           "owner": "Developer",
           "createdAt": "2026-02-28T18:22:28.952Z",
           "updatedAt": "2026-02-28T18:22:28.952Z",
-          "locked": false,
+          "locked": true,
           "images": []
         }
       ]
-    },
-    {
-      "id": "inprogress",
-      "title": "In Progress",
-      "items": []
-    },
-    {
-      "id": "retest",
-      "title": "Re-Test",
-      "items": []
     },
     {
       "id": "feedback",
