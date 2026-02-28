@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 47,
+  "version": 48,
   "columns": [
     {
       "id": "todo",
@@ -126,6 +126,11 @@
               "text": "Minimal risk, but I’ll double‑check:\n• I’ll test hero responsiveness on mobile and tablet,\n• Confirm the new image doesn’t cause text readability issues,\n• Verify existing “Request Demo” click tracking still works after the style changes.\n\nI can have an updated UAT build ready by tomorrow.",
               "author": "developer",
               "createdAt": "2026-02-28T18:40:45.049Z"
+            },
+            {
+              "text": "Timeline works. Please also make sure the headline still fits on two lines on laptop-sized screens; we don’t want it wrapping awkwardly.",
+              "author": "account",
+              "createdAt": "2026-02-28T18:41:03.680Z"
             }
           ],
           "section": "",
