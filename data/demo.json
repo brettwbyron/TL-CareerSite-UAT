@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 48,
+  "version": 49,
   "columns": [
     {
       "id": "todo",
@@ -131,6 +131,11 @@
               "text": "Timeline works. Please also make sure the headline still fits on two lines on laptop-sized screens; we don’t want it wrapping awkwardly.",
               "author": "account",
               "createdAt": "2026-02-28T18:41:03.680Z"
+            },
+            {
+              "text": "Got it. I’ll adjust the font size and line-height so it stays within two lines at common viewport widths and won’t clip on smaller screens.",
+              "author": "developer",
+              "createdAt": "2026-02-28T18:41:28.924Z"
             }
           ],
           "section": "",
