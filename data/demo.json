@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 51,
+  "version": 52,
   "columns": [
     {
       "id": "todo",
@@ -29,7 +29,13 @@
           "description": "Task with image attachments",
           "type": "Feature",
           "device": "All",
-          "feedback": [],
+          "feedback": [
+            {
+              "text": "sadfkjhasdf\n\n\nasdgflkjh",
+              "author": "account",
+              "createdAt": "2026-02-28T18:42:30.390Z"
+            }
+          ],
           "section": "All pages",
           "owner": "Developer",
           "createdAt": "2026-02-23T19:48:43.868Z",
