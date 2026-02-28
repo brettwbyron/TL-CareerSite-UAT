@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 57,
+  "version": 58,
   "columns": [
     {
       "id": "todo",
@@ -219,7 +219,27 @@
     {
       "id": "cancelled",
       "title": "Cancelled",
-      "items": []
+      "items": [
+        {
+          "id": 1772307285887,
+          "description": "We want something extra special. Can we do that now, or do we need to wait and ask you later?",
+          "type": "Feature",
+          "device": "All",
+          "feedback": [
+            {
+              "text": "Unfortunately, since we are now in the UAT process, we cannot make any significant changes to the design or functionality of this project. You will need to ask me later.",
+              "author": "developer",
+              "createdAt": "2026-02-28T19:34:45.886Z"
+            }
+          ],
+          "section": "Home page",
+          "owner": "Developer",
+          "createdAt": "2026-02-28T19:34:45.887Z",
+          "updatedAt": "2026-02-28T19:34:45.887Z",
+          "locked": true,
+          "images": []
+        }
+      ]
     }
   ],
   "disableAddTask": false
