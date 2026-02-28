@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 45,
+  "version": 46,
   "columns": [
     {
       "id": "todo",
@@ -116,6 +116,11 @@
               "text": "Yes, that sounds right. Also, can the button have slightly rounded corners and a hover effect so it feels more interactive?",
               "author": "account",
               "createdAt": "2026-02-28T18:39:54.883Z"
+            },
+            {
+              "text": "Noted: new hero background image, larger headline, updated primary button color, rounded corners, and hover effect. Dev, any risk this impacts layout or the current UAT test cases?",
+              "author": "pm",
+              "createdAt": "2026-02-28T18:40:17.170Z"
             }
           ],
           "section": "",
