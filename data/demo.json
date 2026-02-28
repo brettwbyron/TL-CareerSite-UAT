@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 39,
+  "version": 40,
   "columns": [
     {
       "id": "todo",
@@ -82,14 +82,15 @@
         },
         {
           "id": 1772302948952,
-          "description": "A test for a ton of feedback items",
+          "description": "A task with a lot of feedback",
           "type": "Change Request",
           "device": "All",
           "feedback": [
             {
-              "text": "Writing up double digit feedback notes",
+              "text": "Hi both, I saw the new design change request about making the hero section “more eye-catching” and updating the button styles. Could you clarify what specifically isn’t working for you in the current UAT version?",
               "author": "developer",
-              "createdAt": "2026-02-28T18:21:59.785Z"
+              "createdAt": "2026-02-28T18:21:59.785Z",
+              "editedAt": "2026-02-28T18:37:34.747Z"
             }
           ],
           "section": "",
