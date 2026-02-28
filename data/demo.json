@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 49,
+  "version": 50,
   "columns": [
     {
       "id": "todo",
@@ -136,6 +136,11 @@
               "text": "Got it. I’ll adjust the font size and line-height so it stays within two lines at common viewport widths and won’t clip on smaller screens.",
               "author": "developer",
               "createdAt": "2026-02-28T18:41:28.924Z"
+            },
+            {
+              "text": "Once the changes are on UAT, we’ll send you a short checklist: verify the new background, headline size, button color/shape/hover, and that no content overlaps on mobile. If everything looks good, we’ll consider this design change request approved within the current release.",
+              "author": "pm",
+              "createdAt": "2026-02-28T18:41:41.665Z"
             }
           ],
           "section": "",
