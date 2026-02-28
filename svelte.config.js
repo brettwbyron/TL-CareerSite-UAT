@@ -7,7 +7,7 @@ const config = {
 			fallback: 'index.html'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/TL-CareerSite-UAT' : ''
+			base: process.env.NODE_ENV === 'production' ? '/ReviewAT' : ''
 		}
 	},
 	compilerOptions: { experimental: { async: true } }

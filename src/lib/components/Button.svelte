@@ -37,7 +37,7 @@
   }
 </script>
 
-<div class="employ-button">
+<div>
   <svelte:element
     this={element}
     {...(element === 'a' ? { href, target, rel } : { type: 'button', disabled: disabled || loading })}
@@ -70,7 +70,7 @@
     text-decoration: none;
     background-color: transparent;
 
-    &:is(:hover,:focus,:active) {
+    &:hover {
       background-color: transparent;
       color: inherit;
     }
@@ -102,19 +102,31 @@
     to { transform: rotate(360deg); }
   }
 
+  @media (max-width: 768px) {
+    div {
+      display: block;
+      width: 100%;
+    }
+
+    .button {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
   .button-primary,
   .button-save {
     background-color: var(--primary);
-    color: #fff;
+    color: var(--bg-2);
     border-color: var(--primary);
   }
   
   .button-secondary {
     background-color: #bcf3ff;
     border-color: #bcf3ff;
-    color: #000;
+    color: var(--bg-2);
 
-    &:is(:hover,:focus,:active) {
+    &:hover {
       color: inherit;
     }
   }
@@ -125,7 +137,7 @@
     border-color: var(--bg-3);
     color: var(--fg-1);
 
-    &:is(:hover,:focus,:active) {
+    &:hover {
       border-color: var(--primary);
     }
   }
@@ -135,7 +147,7 @@
     border-color: var(--error);
     color: #fff;
 
-    &:is(:hover,:focus,:active) {
+    &:hover {
       background-color: #fff;
       color: var(--error);
     }
@@ -143,21 +155,21 @@
   
   .button-hollow {
     background-color: transparent;
-    border-color: #fff;
-    color: #fff;
+    border-color: var(--fg-1);
+    color: var(--fg-1);
 
-    &:is(:hover,:focus,:active) {
+    &:hover {
       background-color: #fff;
-      color: var(--primary);
+      border-color: var(--primary);
     }
   }
 
   .button-hollow-primary {
     background-color: transparent;
     border-color: var(--primary);
-    color: var(--primary);
+    color: var(--fg-1);
 
-    &:is(:hover,:focus,:active) {
+    &:hover {
       background-color: var(--primary);
       color: #fff;
     }

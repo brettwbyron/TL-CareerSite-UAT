@@ -29,7 +29,7 @@ Your environment variables need to be stored as GitHub repository secrets so the
 | `VITE_GITHUB_OWNER` | Your GitHub username |
 | `VITE_GITHUB_REPO` | This repository name (same repo) |
 | `VITE_GITHUB_TOKEN` | Your GitHub personal access token |
-| `VITE_GITHUB_BRANCH` | `main` (or your branch name) |
+| `VITE_GITHUB_BRANCH` | `data` (or your branch name for data storage) |
 | `VITE_ADMIN_PASSWORD` | Your admin panel password |
 
 ### 3. Enable GitHub Pages
@@ -60,13 +60,13 @@ The [.github/workflows/deploy.yml](.github/workflows/deploy.yml) workflow:
 - Builds the app with secrets as environment variables
 - Deploys to GitHub Pages
 
-### Customer URLs
-Share customer-specific URLs like:
+### Account URLs
+Share account-specific URLs like:
 ```
-https://your-username.github.io/your-repo-name/#customer-name
+https://your-username.github.io/your-repo-name/#account-name
 ```
 
-Each customer gets their own URL with their customer ID after the `#`.
+Each account gets their own URL with their account ID after the `#`.
 
 ## Manual Deployment (Optional)
 
@@ -101,9 +101,9 @@ For your use case (non-sensitive UAT data), this is acceptable.
 - Verify the `base` path in [svelte.config.js](svelte.config.js) matches your repo name exactly
 - Make sure it starts with `/` and has no trailing slash
 
-### Customer Can't Load Data
+### Users Can't Load Data
 - Verify your GitHub token has "Contents: Read and write" permission
-- Check that the `/data/` directory exists in **this repository** (create it if missing)
+- Check that the `/data/` branch exists in **this repository** (create it if missing)
 - Verify the token hasn't expired (or use no expiration)
 - Confirm `VITE_GITHUB_REPO` matches this repository's name exactly
 

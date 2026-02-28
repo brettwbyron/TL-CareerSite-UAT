@@ -120,8 +120,8 @@
   
   // Get variant for each column
   function getColumnVariant(columnId: ColumnId): 'default' | 'alert' | 'warning' | 'info' | 'success' | 'subtle' {
-    if (columnId === 'feedback') return 'alert';
-    if (columnId === 'retest') return 'warning';
+    if (columnId === 'feedback') return 'warning';
+    if (columnId === 'retest') return 'alert';
     if (columnId === 'todo') return 'info';
     if (columnId === 'done') return 'success';
     if (columnId === 'inprogress' || columnId === 'cancelled') return 'subtle';
@@ -164,7 +164,7 @@
             id="edit-display-name"
             type="text"
             bind:value={editDisplayName}
-            placeholder="Customer Display Name"
+            placeholder="Account Display Name"
           />
         </div>
         
@@ -183,12 +183,12 @@
             id="edit-dev-url"
             type="text"
             bind:value={editDevSiteUrl}
-            placeholder="customercareers-dev.ttcportals.com"
+            placeholder="https://linkto.reviewpage.com"
           />
         </div>
         
         <div class="form-group">
-          <label for="edit-uat-folder-url">UAT Folder URL</label>
+          <label for="edit-uat-folder-url">UAT Folder URL (Optional. Used for uploading assets)</label>
           <input
             id="edit-uat-folder-url"
             type="text"
@@ -198,7 +198,7 @@
         </div>
         
         <div class="form-group">
-          <label for="edit-contact-emails">Contact Emails</label>
+          <label for="edit-contact-emails">Contact Emails (Optional. Used for email alerts)</label>
           <input
             id="edit-contact-emails"
             type="text"
@@ -238,7 +238,8 @@
         <h1>{displayName || customerId}</h1>
         {#if uatEndDate}
           <div class="uat-info-section">
-            <span class="uat-end-date" class:warning={isUatEndingSoon} class:error={isUatExpired}>
+            <div class="uat-date-container">
+              <span class="uat-end-date" class:warning={isUatEndingSoon} class:error={isUatExpired}>
               {#if isUatExpired}
                 UAT review is over. Fixing in progress.
               {:else}
@@ -252,6 +253,10 @@
                 {/if}
               {/if}
             </span>
+            {#if isUatEndingSoon}
+              <p class="uat-deadline-warning">Once this deadline passes, no tasks may be added</p>
+            {/if}
+            </div>
             {#if uatFolderUrl}
               <ButtonComponent 
                 element="a"
@@ -268,15 +273,13 @@
         {/if}
       </div>
       {#if isAdmin}
-        <div class="header-container">
-          <ButtonComponent 
-            element="button"
-            text="Edit Account Info"
-            type="primary"
-            size="small"
-            onClick={startEditingAccountInfo}
-          />
-        </div>
+        <ButtonComponent 
+          element="button"
+          text="Edit Account Info"
+          type="primary"
+          size="small"
+          onClick={startEditingAccountInfo}
+        />
       {/if}
     {/if}
     {#if isAdmin}
@@ -297,6 +300,7 @@
         <ColumnComponent
           column={feedbackColumn}
           {isAdmin}
+          {displayName}
           variant={getColumnVariant(feedbackColumn.id)}
           isDragOver={dragOverColumn === feedbackColumn.id}
           draggedItemId={draggedItem?.id}
@@ -315,6 +319,7 @@
         <ColumnComponent
           column={retestColumn}
           {isAdmin}
+          {displayName}
           variant={getColumnVariant(retestColumn.id)}
           isDragOver={dragOverColumn === retestColumn.id}
           draggedItemId={draggedItem?.id}
@@ -334,6 +339,7 @@
       <ColumnComponent
         {column}
         {isAdmin}
+        {displayName}
         variant={getColumnVariant(column.id)}
         isDragOver={dragOverColumn === column.id}
         draggedItemId={draggedItem?.id}
@@ -352,6 +358,7 @@
       <ColumnComponent
         column={inProgressColumn}
         {isAdmin}
+        {displayName}
         variant="subtle"
         isDragOver={dragOverColumn === inProgressColumn.id}
         draggedItemId={draggedItem?.id}
@@ -368,6 +375,7 @@
       <ColumnComponent
         column={cancelledColumn}
         {isAdmin}
+        {displayName}
         variant="subtle"
         isDragOver={dragOverColumn === cancelledColumn.id}
         draggedItemId={draggedItem?.id}
@@ -386,7 +394,7 @@
   .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 2rem 1rem;
   }
 
   .account-info {
@@ -416,6 +424,23 @@
     gap: 1rem;
   }
 
+  .uat-date-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .uat-deadline-warning {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0.375rem 0 0 0;
+    font-size: 0.8125rem;
+    color: var(--fg-3);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
   .uat-end-date {
     color: var(--fg-2);
     font-size: 0.95rem;
@@ -428,15 +453,15 @@
   }
 
   .uat-end-date.warning {
-    background: #fef3c7;
-    color: #92400e;
+    background: var(--warning-bg);
+    color: var(--warning-fg);
     border-color: var(--warning);
     box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
   }
 
   .uat-end-date.error {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-    color: #991b1b;
+    background: var(--error-bg);
+    color: var(--error-fg);
     border-color: var(--error);
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
     font-weight: 700;
@@ -564,12 +589,6 @@
     gap: 1.5rem;
   }
 
-  :global(html.dark) .uat-end-date.error {
-    background: linear-gradient(135deg, rgba(255, 235, 238, 0.15) 0%, rgba(255, 205, 210, 0.15) 100%);
-    border-color: rgba(244, 67, 54, 0.6);
-    color: #ffcdd2;
-  }
-
   @media (max-width: 768px) {
     .top-columns {
       flex-direction: column;
@@ -577,6 +596,27 @@
 
     .columns {
       grid-template-columns: 1fr;
+    }
+
+    .header-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .uat-date-container {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .uat-end-date {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .uat-deadline-warning {
+      white-space: normal;
+      max-width: 100%;
     }
   }
 </style>

@@ -66,7 +66,7 @@
     }
 
     if (!newCustomerId.trim()) {
-      createError = 'Customer ID is required';
+      createError = 'Account ID is required';
       return;
     }
     
@@ -94,9 +94,9 @@
       return;
     }
     
-    // Check if customer already exists
+    // Check if account already exists
     if (customers.some(c => c.name === `${newCustomerId.toLowerCase()}.json`)) {
-      createError = 'Customer already exists';
+      createError = 'Account already exists';
       return;
     }
     
@@ -182,7 +182,7 @@
               <button
                 class="delete-btn"
                 onclick={(e) => handleDeleteClick(customer.name.replace('.json', ''), e)}
-                title="Delete customer"
+                title="Delete account"
               >
                 🗑️
               </button>
@@ -193,13 +193,13 @@
       
       <div class="admin-actions">
         <button class="create-toggle-btn" onclick={toggleCreateForm}>
-          {showCreateForm ? 'Cancel' : '+ Create New Customer'}
+          {showCreateForm ? 'Cancel' : '+ Create New Account'}
         </button>
         
         {#if showCreateForm}
           <form class="create-form" onsubmit={handleCreateSubmit}>
             <div class="form-group">
-              <label for="new-customer-id">Customer ID</label>
+              <label for="new-customer-id">Account ID</label>
               <input
                 id="new-customer-id"
                 type="text"
@@ -215,7 +215,7 @@
                 id="new-display-name"
                 type="text"
                 bind:value={newDisplayName}
-                placeholder="Customer Display Name"
+                placeholder="Account Display Name"
                 required
               />
             </div>
@@ -236,13 +236,13 @@
                 id="new-dev-url"
                 type="text"
                 bind:value={newDevUrl}
-                placeholder="customercareers-dev.ttcportals.com"
+                placeholder="https://linkto.reviewpage.com"
                 required
               />
             </div>
             
             <div class="form-group">
-              <label for="new-uat-folder-url">UAT Folder URL (Optional)</label>
+              <label for="new-uat-folder-url">UAT Folder URL (Optional. Used for uploading assets)</label>
               <input
                 id="new-uat-folder-url"
                 type="text"
@@ -252,7 +252,7 @@
             </div>
             
             <div class="form-group">
-              <label for="new-contact-emails">Contact Emails (Optional)</label>
+              <label for="new-contact-emails">Contact Emails (Optional. Used for email alerts)</label>
               <input
                 id="new-contact-emails"
                 type="text"
@@ -277,7 +277,7 @@
             {/if}
             
             <button type="submit" class="create-submit-btn">
-              Create Customer
+              Create Account
             </button>
           </form>
         {/if}
@@ -295,7 +295,7 @@
       onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ') { cancelDelete(); } }}
     >
       <div class="confirm-modal" role="alertdialog" tabindex="0" onclick={(e) => e.stopPropagation()} onkeydown={(e) => e.stopPropagation()}>
-        <h2>Delete Customer</h2>
+        <h2>Delete Account</h2>
         <p>Are you sure you want to delete <strong>{deleteConfirmId}</strong>?</p>
         <p class="warning">This will permanently delete their data file.</p>
         <div class="modal-actions">

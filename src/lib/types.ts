@@ -1,6 +1,6 @@
 export const TASK_TYPES = ['Change Request', 'Issue', 'Feature'] as const;
 export const DEVICE_TYPES = ['All', 'Desktop', 'Mobile'] as const;
-export const OWNER_TYPES = ['PM', 'CWS Dev', 'Customer'] as const;
+export const OWNER_TYPES = ['PM', 'Developer', 'Account'] as const;
 
 export type DeviceType = typeof DEVICE_TYPES[number];
 export type TaskType = typeof TASK_TYPES[number];
@@ -10,7 +10,7 @@ export type ColumnId = 'todo' | 'inprogress' | 'retest' | 'feedback' | 'done' | 
 
 export interface FeedbackItem {
 	text: string;
-	author: 'customer' | 'pm' | 'cws-dev';
+	author: 'account' | 'pm' | 'developer';
 	createdAt: string;
 	editedAt?: string;
 }

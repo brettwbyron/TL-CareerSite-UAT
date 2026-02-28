@@ -37,10 +37,10 @@
   
   // Local state for new feedback input
   let newFeedbackText = $state('');
-  let feedbackRole = $state<'pm' | 'cws-dev' | undefined>(undefined);
+  let feedbackRole = $state<'pm' | 'developer' | undefined>(undefined);
   let editingFeedbackIndex = $state<number | null>(null);
   let editingFeedbackText = $state('');
-  let editingFeedbackAuthor = $state<'pm' | 'cws-dev' | undefined>(undefined);
+  let editingFeedbackAuthor = $state<'pm' | 'developer' | undefined>(undefined);
   
   // Filter columns for non-admin users (exclude inprogress, feedback, retest, and cancelled, but always include the current column)
   const availableColumns = $derived(
@@ -66,11 +66,11 @@
   }
   
   // Format author label for display
-  function formatAuthor(author: 'customer' | 'pm' | 'cws-dev' | 'admin'): string {
+  function formatAuthor(author: 'account' | 'pm' | 'developer' | 'admin'): string {
     if (author === 'pm') return 'PM';
-    if (author === 'cws-dev') return 'CWS Dev';
+    if (author === 'developer') return 'Developer';
     if (author === 'admin') return 'Admin';
-    return displayName || 'Customer';
+    return displayName || 'Account';
   }
   
   // Handle save with new feedback
@@ -84,7 +84,7 @@
       const updatedFeedback = [...modalData.feedback];
       const currentFeedback = updatedFeedback[editingFeedbackIndex];
       
-      // For admins, require author selection; for customers, keep as 'customer'
+      // For admins, require author selection; for accounts, keep as 'account'
       const newAuthor = isAdmin ? editingFeedbackAuthor : currentFeedback.author;
       
       if (isAdmin && !editingFeedbackAuthor) {
@@ -111,7 +111,7 @@
       }
       const newFeedback: FeedbackItem = {
         text: newFeedbackText.trim(),
-        author: isAdmin ? feedbackRole! : 'customer',
+        author: isAdmin ? feedbackRole! : 'account',
         createdAt: new Date().toISOString()
       };
       modalData.feedback = [...modalData.feedback, newFeedback];
@@ -127,7 +127,7 @@
     editingFeedbackText = modalData.feedback[index].text;
     const author = modalData.feedback[index].author;
     // Map author to editable format
-    editingFeedbackAuthor = author === 'pm' ? 'pm' : author === 'cws-dev' ? 'cws-dev' : undefined;
+    editingFeedbackAuthor = author === 'pm' ? 'pm' : author === 'developer' ? 'developer' : undefined;
   }
   
   function saveEditFeedback() {
@@ -135,7 +135,7 @@
       const updatedFeedback = [...modalData.feedback];
       const currentFeedback = updatedFeedback[editingFeedbackIndex];
       
-      // For admins, require author selection; for customers, keep as 'customer'
+      // For admins, require author selection; for accounts, keep as 'account'
       const newAuthor = isAdmin ? editingFeedbackAuthor : currentFeedback.author;
       
       if (isAdmin && !editingFeedbackAuthor) {
@@ -187,6 +187,9 @@
 
   let selectedImage = $state<string | null>(null);
   let descriptionTextarea = $state<HTMLTextAreaElement>();
+  let newFeedbackTextarea = $state<HTMLTextAreaElement>();
+  let editingFeedbackTextarea = $state<HTMLTextAreaElement>();
+  let feedbackListContainer = $state<HTMLDivElement>();
 
   // Compress image using canvas
   async function compressImage(file: File): Promise<string> {
@@ -244,10 +247,20 @@
     textarea.style.height = textarea.scrollHeight + 'px';
   }
 
-  // Adjust height when modal opens
+  // Adjust height when modal opens or feedback editing starts
   $effect(() => {
     if (show && descriptionTextarea) {
       adjustTextareaHeight(descriptionTextarea);
+    }
+    if (show && newFeedbackTextarea) {
+      adjustTextareaHeight(newFeedbackTextarea);
+    }
+    if (show && editingFeedbackIndex !== null && editingFeedbackTextarea) {
+      adjustTextareaHeight(editingFeedbackTextarea);
+    }
+    // Scroll feedback list to bottom when modal opens
+    if (show && feedbackListContainer) {
+      feedbackListContainer.scrollTop = feedbackListContainer.scrollHeight;
     }
   });
 
@@ -398,20 +411,20 @@
           <div class="label">Feedback / Notes</div>
           
           {#if modalData.feedback.length > 0}
-            <div class="feedback-list">
+            <div class="feedback-list" bind:this={feedbackListContainer}>
               {#each modalData.feedback as feedbackItem, index}
                 <div 
                   class="feedback-item"
-                  class:feedback-align-left={(isAdmin && feedbackItem.author === 'customer') || (!isAdmin && feedbackItem.author !== 'customer')}
-                  class:feedback-align-right={(isAdmin && feedbackItem.author !== 'customer') || (!isAdmin && feedbackItem.author === 'customer')}
+                  class:feedback-align-left={(isAdmin && feedbackItem.author === 'account') || (!isAdmin && feedbackItem.author !== 'account')}
+                  class:feedback-align-right={(isAdmin && feedbackItem.author !== 'account') || (!isAdmin && feedbackItem.author === 'account')}
                 >
                   {#if editingFeedbackIndex === index}
                     <!-- Edit mode -->
                     {#if isAdmin}
                       <div class="feedback-role-selector">
                         <label>
-                          <input type="radio" bind:group={editingFeedbackAuthor} value="cws-dev" required />
-                          <span>CWS Dev</span>
+                          <input type="radio" bind:group={editingFeedbackAuthor} value="developer" required />
+                          <span>Developer</span>
                         </label>
                         <label>
                           <input type="radio" bind:group={editingFeedbackAuthor} value="pm" required />
@@ -420,9 +433,11 @@
                       </div>
                     {/if}
                     <textarea
+                      bind:this={editingFeedbackTextarea}
                       bind:value={editingFeedbackText}
                       rows="3"
                       class="feedback-edit-textarea"
+                      oninput={(e) => adjustTextareaHeight(e.currentTarget)}
                     ></textarea>
                     <div class="feedback-edit-actions">
                       <button type="button" class="feedback-save-btn" onclick={saveEditFeedback}>Save</button>
@@ -434,8 +449,8 @@
                       <span 
                         class="feedback-author" 
                         class:pm={feedbackItem.author === 'pm'}
-                        class:cws-dev={feedbackItem.author === 'cws-dev'}
-                        class:customer={feedbackItem.author === 'customer'}
+                        class:developer={feedbackItem.author === 'developer'}
+                        class:account={feedbackItem.author === 'account'}
                       >
                         {formatAuthor(feedbackItem.author)}
                       </span>
@@ -446,7 +461,7 @@
                             <span class="edited-indicator" title={'Edited at ' + formatDate(feedbackItem.editedAt)}>(edited)</span>
                           {/if}
                         </span>
-                        {#if isAdmin && feedbackItem.author !== 'customer'}
+                        {#if isAdmin && feedbackItem.author !== 'account'}
                           <button type="button" class="feedback-action-btn" onclick={() => startEditFeedback(index)} title="Edit">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -461,7 +476,7 @@
                               <line x1="14" y1="11" x2="14" y2="17"/>
                             </svg>
                           </button>
-                        {:else if !isAdmin && feedbackItem.author === 'customer'}
+                        {:else if !isAdmin && feedbackItem.author === 'account'}
                           <button type="button" class="feedback-action-btn" onclick={() => startEditFeedback(index)} title="Edit">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                               <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -482,8 +497,8 @@
             {#if isAdmin}
               <div class="feedback-role-selector">
                 <label>
-                  <input type="radio" bind:group={feedbackRole} value="cws-dev" required />
-                  <span>CWS Dev</span>
+                  <input type="radio" bind:group={feedbackRole} value="developer" required />
+                  <span>Developer</span>
                 </label>
                 <label>
                   <input type="radio" bind:group={feedbackRole} value="pm" required />
@@ -493,9 +508,11 @@
             {/if}
             <textarea 
               id="feedback"
+              bind:this={newFeedbackTextarea}
               bind:value={newFeedbackText}
               rows="3"
               placeholder="Add new feedback or notes..."
+              oninput={(e) => adjustTextareaHeight(e.currentTarget)}
             ></textarea>
           {/if}
         </div>
@@ -954,13 +971,13 @@
     font-weight: 600;
   }
   
-  /* Customer - error colors */
-  .feedback-author.customer {
+  /* Account - error colors */
+  .feedback-author.account {
     color: var(--error);
   }
 
-  :global(.dark) .feedback-author.customer {
-    color: var(--error-light);
+  :global(.dark) .feedback-author.account {
+    color: var(--error-bg);
   }
   
   /* PM - info colors */
@@ -969,15 +986,15 @@
   }
 
   :global(.dark) .feedback-author.pm {
-    color: var(--info-light);
+    color: var(--info-bg);
   }
 
-  /* CWS Dev - primary colors */
-  .feedback-author.cws-dev {
+  /* Developer - primary colors */
+  .feedback-author.developer {
     color: var(--primary);
   }
 
-  :global(.dark) .feedback-author.cws-dev {
+  :global(.dark) .feedback-author.developer {
     color: var(--primary-light);
   }
 
@@ -1019,7 +1036,7 @@
   }
   
   :global(.dark) .feedback-action-btn.delete:hover svg {
-    color: var(--error-light);
+    color: var(--error-bg);
   }
   
   .feedback-role-selector {

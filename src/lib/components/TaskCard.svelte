@@ -7,6 +7,7 @@
     isDragging = false,
     isReadOnly = false,
     isAdmin = false,
+    displayName = '',
     onDragStart,
     onClick,
     onToggleLock
@@ -16,10 +17,14 @@
     isDragging?: boolean;
     isReadOnly?: boolean;
     isAdmin?: boolean;
+    displayName?: string;
     onDragStart: (e: DragEvent, item: Task, columnId: ColumnId) => void;
     onClick: (item: Task, columnId: ColumnId) => void;
     onToggleLock?: (itemId: number) => void;
   } = $props();
+  
+  // Display owner value - show display name if owner is 'Account'
+  const ownerDisplay = $derived(item.owner === 'Account' ? (displayName || 'Account') : item.owner);
 
   function handleDragStart(e: DragEvent) {
     if (isReadOnly) {
@@ -71,15 +76,15 @@
               <span class="owner-label">Owner:</span>
               <span 
                 class="owner-value" 
-                class:owner-cws-dev={item.owner === 'CWS Dev'}
+                class:owner-developer={item.owner === 'Developer'}
                 class:owner-pm={item.owner === 'PM'}
-                class:owner-customer={item.owner === 'Customer'}
-              >{item.owner}</span>
+                class:owner-account={item.owner === 'Account'}
+              >{ownerDisplay}</span>
             </div>
           {/if}
           {#if item.feedback && item.feedback.length > 0}
             <div class="item-feedback-badge">
-              <span class="feedback-icon">💬</span>
+              <span class="feedback-icon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>
               <span class="feedback-count">{item.feedback.length}</span>
             </div>
           {/if}
@@ -106,19 +111,36 @@
       {#if item.type || isAdmin}
          <div class="item-header">
            {#if item.type}
-             <span class="item-type">{item.type}</span>
+              <span 
+                class="item-type"
+                class:item-type-change={item.type === "Change Request"}
+                class:item-type-feature={item.type === "Feature"}
+                class:item-type-issue={item.type === "Issue"}>
+                {item.type}
+              </span>
            {:else}
-             <span class="item-type-none"></span>
+              <span class="item-type-none"></span>
            {/if}
            {#if isAdmin}
-             <button
-               class="lock-toggle"
-               onclick={handleLockToggle}
-               aria-label={item.locked ? 'Unlock task' : 'Lock task'}
-               title={item.locked ? 'Click to unlock task' : 'Click to lock task'}
-             >
-               {item.locked ? '🔒' : '🔓'}
-             </button>
+              <button
+                class="lock-toggle"
+                class:lock-toggle-locked={item.locked}
+                onclick={handleLockToggle}
+                aria-label={item.locked ? 'Unlock task' : 'Lock task'}
+                title={item.locked ? 'Click to unlock task' : 'Click to lock task'}
+              >
+                {#if item.locked}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect fill="currentColor" x="5" y="11" width="14" height="10" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                {:else}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="5" y="11" width="14" height="10" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 9.9-1"></path>
+                  </svg>
+                {/if}
+              </button>
            {/if}
          </div>
       {/if}
@@ -127,7 +149,7 @@
 
 <style>
   .item {
-    background: white;
+    background: var(--bg-2);
     padding: 1.125rem;
     border-radius: var(--border-radius);
     cursor: grab;
@@ -168,12 +190,16 @@
   .lock-toggle {
     background: none;
     border: none;
-    font-size: 1.2rem;
     cursor: pointer;
     line-height: 1;
     opacity: 0.7;
     transition: opacity 0.2s, transform 0.2s;
     z-index: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.9rem;
   }
 
   .lock-toggle:hover {
@@ -197,11 +223,26 @@
     font-size: 0.625rem;
     padding: 0.375rem 0.875rem;
     border-radius: 16px;
-    background: var(--primary-light);
-    color: var(--primary);
+    background: var(--bg-3);
+    color: var(--fg-2);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+  }
+
+  .item-type-change {
+    background: var(--primary-bg);
+    color: var(--primary-fg);
+  }
+  
+  .item-type-feature {
+    background: var(--warning-bg);
+    color: var(--warning-fg);
+  }
+
+  .item-type-issue {
+    background: var(--error-bg);
+    color: var(--error-fg);
   }
 
   .item-description {
@@ -242,31 +283,19 @@
     font-weight: 500;
   }
 
-  /* CWS Dev - info colors */
-  .owner-value.owner-cws-dev {
-    color: var(--info);
-  }
-
-  :global(.dark) .owner-value.owner-cws-dev {
-    color: var(--info-light);
+  /* Developer - info colors */
+  .owner-value.owner-developer {
+    color: var(--info-fg);
   }
 
   /* PM - warning colors */
   .owner-value.owner-pm {
-    color: var(--warning);
+    color: var(--warning-fg);
   }
 
-  :global(.dark) .owner-value.owner-pm {
-    color: var(--warning-light);
-  }
-
-  /* Customer - error colors */
-  .owner-value.owner-customer {
-    color: var(--error);
-  }
-
-  :global(.dark) .owner-value.owner-customer {
-    color: var(--error-light);
+  /* Account - error colors */
+  .owner-value.owner-account {
+    color: var(--error-fg);
   }
 
   .item-images {
@@ -321,25 +350,32 @@
     gap: 0.25rem;
     font-size: 0.75rem;
     color: var(--fg-2);
+    position: relative;
+    width: 1em;
+    padding-right: 0.5rem;
+    padding-top: 0.4rem;
   }
 
   .feedback-icon {
-    font-size: 0.875rem;
-    line-height: 1;
+    width: 0.8rem;
+    height: 0.8rem;
+    flex-shrink: 0;
   }
 
   .feedback-count {
     font-weight: 600;
-  }
-
-  /* Dark mode adjustments */
-  :global(html.dark) .item {
-    background: rgba(39, 45, 69, 0.6);
-    border-color: rgba(76, 76, 76, 0.5);
-  }
-
-  :global(html.dark) .item:not(.read-only):hover {
-    background: rgba(39, 45, 69, 0.8);
-    border-color: var(--primary);
+    height: 1em;
+    font-size: 0.7rem;
+    width: auto;
+    background-color: var(--bg-2);
+    transition: var(--global-transition);
+    position: absolute;
+    top: 0;
+    left: calc(100% - 1em);
+    padding: 1px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

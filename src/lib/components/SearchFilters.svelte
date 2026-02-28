@@ -49,7 +49,7 @@
       element="button"
       text="Help"
       title="View status guide"
-      type="hollow-primary"
+      type="hollow"
       size="small"
       onClick={onHelp}
     />
@@ -142,6 +142,12 @@
     }
 
     .action-buttons {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    .action-buttons :global(button),
+    .action-buttons :global(a) {
       width: 100%;
     }
   }

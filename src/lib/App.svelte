@@ -25,7 +25,7 @@
 </script>
 
 <svelte:head>
-	<title>Career Site UAT</title>
+	<title>ReviewAT</title>
 
 	<script>
 		{ const theme = localStorage.getItem('sv:theme'); document.documentElement.classList.add( !theme || theme === 'system' ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' : theme ); }
@@ -50,22 +50,31 @@
 		--bg-1: #f8f9fc;
 		--bg-2: #ffffff;
 		--bg-3: #e8eaf0;
-		--navbar-bg: #8f3db8;
-		--fg-1: #1a1f36;
-		--fg-2: #5c6778;
+		--fg-1: #061419;
+		--fg-2: #454D59;
 		--fg-3: #8792a8;
-		--primary: #8f3db8;
-		--primary-hover: #281330;
-		--primary-light: #f1d9fb;
-		--success: #0d7a3f;
-		--success-bg: #d1f4e0;
-		--success-hover: #059669;
-		--warning: #f59e0b;
-		--warning-light: #ffe0b2;
-		--error: #ef4444;
-		--error-light: #ffcdd2;
+		--primary: #3cb7ff;
+		--primary-fg: #004770;
+		--primary-bg: #b3e3ff;
+		--secondary: #6c9;
+		--secondary-fg: #1c5438;
+		--secondary-bg: #c6ecd9;
+		--success: #0d783f;
+		--success-fg: #064e3b;
+		--success-bg: #bff8d9;
+		--success-gradient: linear-gradient(135deg, hsl(148, 76%, 97%) 0%, hsl(148, 84%, 93%) 100%);
 		--info: #3730a3;
-		--info-light: #bbdefb;
+		--info-fg: #332e7f;
+		--info-bg: #bbdefb;
+		--info-gradient: linear-gradient(135deg, hsl(207, 89%, 96%) 0%, hsl(207, 89%, 86%) 100%);
+		--warning: #f59e0b;
+		--warning-fg: #92400e;
+		--warning-bg: #fef3c7;
+		--warning-gradient: linear-gradient(135deg, hsl(38, 92%, 95%) 0%, hsl(38, 92%, 85%) 100%);
+		--error: #ef4444;
+		--error-fg: #991b1b;
+		--error-bg: #ffcdd2;
+		--error-gradient: linear-gradient(135deg, hsl(0, 84%, 98%) 0%, hsl(0, 84%, 93%) 100%);
 		--link: #6366f1;
 		--border-radius: 8px;
 		--font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -73,6 +82,7 @@
 		--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 		--primary-shadow-color: rgba(40, 19, 48, 0.2);
+		--global-transition: all 0.2s ease;
 		color-scheme: light;
 		background: var(--bg-1);
 		color: var(--fg-1);
@@ -89,11 +99,25 @@
 	:global(html.dark) {
 		color-scheme: dark;
 		--bg-1: #0f1117;
-		--bg-2: #1a1f36;
+		--bg-2: #061419;
 		--bg-3: #272d45;
 		--fg-1: #f8f9fc;
 		--fg-2: #b4bcd0;
 		--fg-3: #8792a8;
+		--primary-bg: #004770;
+		--primary-fg: #b3e3ff;
+		--secondary-bg: #1c5438;
+		--secondary-fg: #c6ecd9;
+		--success-bg: #064e3b;
+		--success-fg: #bff8d9;
+		--info-bg: #332e7f;
+		--info-fg: #bbdefb;
+		--warning-bg: #92400e;
+		--warning-fg: #ffe0b2;
+		--error-bg: #991b1b;
+		--error-fg: #ffcdd2;
+		--info: #bbdefb;
+		--info-bg: #3730a3;
 		--primary-shadow-color: rgba(143, 61, 184, 0.1);
 	}
 
@@ -120,7 +144,7 @@
 		border-radius: 50%;
 		color: var(--fg-1);
 		cursor: pointer;
-		transition: all 0.2s ease;
+		transition: var(--global-transition);
 		box-shadow: var(--shadow-lg);
 		z-index: 1000;
 		opacity: 0.7;

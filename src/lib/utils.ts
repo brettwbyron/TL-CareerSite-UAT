@@ -1,6 +1,20 @@
 import type { Column, ColumnId, BoardData, Task, TaskChange, ConflictData } from './types';
 import { Octokit } from 'octokit';
 
+// UTF-8 safe base64 encoding (supports all Unicode characters including emojis)
+function utf8ToBase64(str: string): string {
+  const bytes = new TextEncoder().encode(str);
+  const binString = Array.from(bytes, (byte) => String.fromCodePoint(byte)).join('');
+  return btoa(binString);
+}
+
+// UTF-8 safe base64 decoding
+function base64ToUtf8(base64: string): string {
+  const binString = atob(base64);
+  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0)!);
+  return new TextDecoder().decode(bytes);
+}
+
 // Focus trap action for modals
 export function trapFocus(node: HTMLElement) {
   const previouslyFocused = document.activeElement as HTMLElement;
@@ -129,12 +143,12 @@ export async function loadDataFromGitHub(
       });
       
       // Blob API returns base64 encoded content
-      const decodedString = atob(blobData.content.replace(/\n/g, ''));
+      const decodedString = base64ToUtf8(blobData.content.replace(/\n/g, ''));
       content = JSON.parse(decodedString);
     } else {
       // Decode base64 content for smaller files
       const base64Content = fileData.content.replace(/\n/g, '');
-      const decodedString = atob(base64Content);
+      const decodedString = base64ToUtf8(base64Content);
       content = JSON.parse(decodedString);
     }
 
@@ -209,7 +223,7 @@ export async function saveDataToGitHub(
       repo: config.repo,
       path: `data/${customerId.toLowerCase()}.json`,
       message,
-      content: btoa(JSON.stringify(dataWithVersion, null, 2)),
+      content: utf8ToBase64(JSON.stringify(dataWithVersion, null, 2)),
       branch: config.branch
     };
 
@@ -268,12 +282,12 @@ export async function loadDataFromGitHubAdmin(
       });
       
       // Blob API returns base64 encoded content
-      const decodedString = atob(blobData.content.replace(/\n/g, ''));
+      const decodedString = base64ToUtf8(blobData.content.replace(/\n/g, ''));
       content = JSON.parse(decodedString);
     } else {
       // Decode base64 content for smaller files
       const base64Content = fileData.content.replace(/\n/g, '');
-      const decodedString = atob(base64Content);
+      const decodedString = base64ToUtf8(base64Content);
       content = JSON.parse(decodedString);
     }
 
@@ -392,11 +406,11 @@ export async function fetchCurrentBoardData(
         file_sha: fileData.sha
       });
       
-      const decodedString = atob(blobData.content.replace(/\n/g, ''));
+      const decodedString = base64ToUtf8(blobData.content.replace(/\n/g, ''));
       content = JSON.parse(decodedString);
     } else {
       const base64Content = fileData.content.replace(/\n/g, '');
-      const decodedString = atob(base64Content);
+      const decodedString = base64ToUtf8(base64Content);
       content = JSON.parse(decodedString);
     }
     

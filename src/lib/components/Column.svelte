@@ -5,6 +5,7 @@
   let {
     column,
     isAdmin = false,
+    displayName = '',
     isDragOver = false,
     draggedItemId = null,
     variant = 'default',
@@ -17,6 +18,7 @@
   }: {
     column: Column;
     isAdmin?: boolean;
+    displayName?: string;
     isDragOver?: boolean;
     draggedItemId?: number | null;
     variant?: 'default' | 'alert' | 'warning' | 'info' | 'success' | 'subtle';
@@ -108,6 +110,7 @@
           {item}
           columnId={column.id}
           {isAdmin}
+          {displayName}
           isDragging={draggedItemId === item.id}
           isReadOnly={isDragDisabled}
           onDragStart={onItemDragStart}
@@ -152,13 +155,14 @@
   .column h2 {
     margin: 0 0 1rem 0;
     color: var(--fg-1);
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
-    letter-spacing: -0.025em;
   }
   
   .column h2 span {
@@ -174,79 +178,63 @@
   }
 
   .column.alert {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    background: var(--error-gradient);
     border: 2px solid var(--error);
     box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
   }
 
   .column.alert h2 {
-    color: #991b1b;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--error-fg);
   }
 
   .column.alert h2 .count,
   .column.alert h2 .admin-only {
-    color: #7f1d1d;
+    color: var(--error-fg);
   }
 
   .column.warning {
-    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    background: var(--warning-gradient);
     border: 2px solid var(--warning);
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.15);
   }
 
   .column.warning h2 {
-    color: #92400e;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--warning-fg);
   }
 
   .column.warning h2 .count,
   .column.warning h2 .admin-only {
-    color: #78350f;
+    color: var(--warning-fg);
   }
 
   .column.info {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    border: 2px solid var(--primary);
+    background: var(--info-gradient);
+    border: 2px solid var(--info);
     box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
   }
 
   .column.info h2 {
-    color: #3730a3;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--info-fg);
   }
 
   .column.info h2 .count,
   .column.info h2 .admin-only {
-    color: #312e81;
+    color: var(--info-fg);
   }
 
   .column.success {
-    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    background: var(--success-gradient);
     border: 2px solid var(--success);
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
   }
 
   .column.success h2 {
-    color: #065f46;
-    font-size: 1rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    color: var(--success-fg);
   }
 
   .column.success h2 .count,
   .column.success h2 .admin-only {
-    color: #064e3b;
+    color: var(--success-fg);
   }
 
   .column.subtle {
@@ -259,7 +247,6 @@
     color: var(--fg-2);
     font-size: 1rem;
     font-weight: 600;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
