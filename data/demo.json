@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 43,
+  "version": 44,
   "columns": [
     {
       "id": "todo",
@@ -106,6 +106,11 @@
               "text": "We can provide the image. I’ll send a high‑resolution version of our latest campaign visual. For the button, I was thinking something closer to our brand accent color—more vibrant than the current blue.",
               "author": "account",
               "createdAt": "2026-02-28T18:39:07.317Z"
+            },
+            {
+              "text": "Once you send that image, I’ll swap it into the hero background. For the text and button:\n- I’ll increase the headline font size by one step on desktop,\n- Update the button color to your brand accent,\n- Ensure contrast still meets accessibility guidelines.\n\nDoes that match your expectations?",
+              "author": "developer",
+              "createdAt": "2026-02-28T18:39:38.258Z"
             }
           ],
           "section": "",
