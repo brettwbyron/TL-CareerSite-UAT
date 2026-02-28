@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 33,
+  "version": 34,
   "columns": [
     {
       "id": "todo",
@@ -43,7 +43,7 @@
         {
           "id": 1771877282041,
           "description": "Task with feedback conversation",
-          "type": "Change Request",
+          "type": "Feature",
           "device": "All",
           "feedback": [
             {
@@ -73,8 +73,8 @@
               "createdAt": "2026-02-23T22:06:10.079Z"
             }
           ],
-          "section": "Home Page",
-          "owner": "Developer",
+          "section": "Global",
+          "owner": "PM",
           "createdAt": "2026-02-23T20:08:02.041Z",
           "updatedAt": "2026-02-23T20:08:02.041Z",
           "locked": false,
