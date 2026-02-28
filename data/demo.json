@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 35,
+  "version": 36,
   "columns": [
     {
       "id": "todo",
@@ -27,7 +27,7 @@
         {
           "id": 1771876123868,
           "description": "Task with image attachments",
-          "type": "Issue",
+          "type": "Feature",
           "device": "All",
           "feedback": [],
           "section": "All pages",
