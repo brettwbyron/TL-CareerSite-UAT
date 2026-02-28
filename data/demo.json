@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 50,
+  "version": 51,
   "columns": [
     {
       "id": "todo",
@@ -141,6 +141,11 @@
               "text": "Once the changes are on UAT, we’ll send you a short checklist: verify the new background, headline size, button color/shape/hover, and that no content overlaps on mobile. If everything looks good, we’ll consider this design change request approved within the current release.",
               "author": "pm",
               "createdAt": "2026-02-28T18:41:41.665Z"
+            },
+            {
+              "text": "Perfect. Send me a note with screenshots once it’s deployed to UAT and I’ll review right away.",
+              "author": "account",
+              "createdAt": "2026-02-28T18:41:58.007Z"
             }
           ],
           "section": "",
