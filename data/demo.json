@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 42,
+  "version": 43,
   "columns": [
     {
       "id": "todo",
@@ -101,6 +101,11 @@
               "text": "Thanks for the details. When you say “stronger background image,” do you already have an alternative image you’d like us to use, or are you expecting our team to source one?",
               "author": "pm",
               "createdAt": "2026-02-28T18:38:53.390Z"
+            },
+            {
+              "text": "We can provide the image. I’ll send a high‑resolution version of our latest campaign visual. For the button, I was thinking something closer to our brand accent color—more vibrant than the current blue.",
+              "author": "account",
+              "createdAt": "2026-02-28T18:39:07.317Z"
             }
           ],
           "section": "",
