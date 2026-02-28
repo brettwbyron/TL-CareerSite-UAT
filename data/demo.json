@@ -5,7 +5,7 @@
   "uatFolderUrl": "",
   "contactEmails": "address@email.com",
   "passwordHash": "2a97516c354b68848cdbd8f54a226a0a55b21ed138e207ad6c5cbb9c00aa5aea",
-  "version": 34,
+  "version": 35,
   "columns": [
     {
       "id": "todo",
@@ -43,7 +43,7 @@
         {
           "id": 1771877282041,
           "description": "Task with feedback conversation",
-          "type": "Feature",
+          "type": "Issue",
           "device": "All",
           "feedback": [
             {
